@@ -1,0 +1,20 @@
+.linkMenu:after {
+  content: "";
+  @apply h-8 w-24 block bg-mostard absolute rounded-sm -left-2 -bottom-2 -z-10;
+}
+
+.listPayments li {
+  @apply flex items-center gap-2;
+}
+
+.imgsOptions img {
+  @apply w-16 h-16 rounded-full border-[5px] border-white-beige;
+}
+
+.imgsOptions img + img {
+  @apply -ml-6;
+}
+
+.imgsOptions p {
+  @apply ml-6;
+}
