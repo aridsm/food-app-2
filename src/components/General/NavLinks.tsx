@@ -1,7 +1,7 @@
 import { Location, NavLink, useLocation } from "react-router-dom";
 import classes from "./NavLinks.module.css";
 
-const NavLinks: React.FC<{ className: string }> = ({ className }) => {
+const NavLinks: React.FC<{ className?: string }> = ({ className }) => {
   const route: Location = useLocation();
   const currentPath: string = route.pathname;
 

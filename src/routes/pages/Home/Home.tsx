@@ -4,7 +4,7 @@ import Footer from "../../../components/Home/Footer";
 import imgHome from "../../../assets/imgs/home-img.jpg";
 import ArcSvg from "../../../assets/imgs/arc.tsx";
 
-const Routes: React.FC = () => {
+const Home: React.FC = () => {
   return (
     <div className="flex h-full w-full">
       <div className={`bg-red-theme w-[47%] relative`}>
@@ -35,4 +35,4 @@ const Routes: React.FC = () => {
   );
 };
 
-export default Routes;
+export default Home;

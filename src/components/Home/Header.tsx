@@ -3,7 +3,7 @@ import {
   faMagnifyingGlass,
   faCartShopping,
 } from "@fortawesome/free-solid-svg-icons";
-import NavLinks from "../Menu/NavLinks.tsx";
+import NavLinks from "../General/NavLinks.tsx";
 import { NavLink } from "react-router-dom";
 
 const Header: React.FC = () => {

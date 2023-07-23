@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="flex items-center justify-between pl-16 text-base text-neutral-400">
+    <footer className="flex items-center justify-between pl-20 text-base text-neutral-400">
       <span>
         <FontAwesomeIcon icon={faTruck} className="mr-3" /> Delivery
       </span>
