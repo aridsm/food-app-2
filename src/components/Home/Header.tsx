@@ -3,6 +3,7 @@ import {
   faMagnifyingGlass,
   faCartShopping,
 } from "@fortawesome/free-solid-svg-icons";
+import NavLinks from "../Menu/NavLinks.tsx";
 import { NavLink } from "react-router-dom";
 
 const Header: React.FC = () => {
@@ -12,16 +13,7 @@ const Header: React.FC = () => {
       <button className="ml-auto">
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
-      <nav className="ml-12">
-        <ul className="flex items-center gap-12">
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/menu">Cardápio</NavLink>
-          </li>
-        </ul>
-      </nav>
+      <NavLinks className="ml-12" />
       <NavLink to="/cart" className="ml-12">
         <FontAwesomeIcon icon={faCartShopping} />
       </NavLink>

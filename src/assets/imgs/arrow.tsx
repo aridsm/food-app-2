@@ -1,8 +1,8 @@
 export const ArcSvg = ({ className }: { className?: string }) => {
   return (
     <svg
-      width="70"
-      height="95"
+      width="50"
+      height="80"
       viewBox="0 0 73 100"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
