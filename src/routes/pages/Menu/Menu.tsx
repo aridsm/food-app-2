@@ -11,11 +11,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Categories from "../../../types/enums/categories";
 
 const Menu: React.FC = () => {
   interface category {
     name: string;
-    id: number;
+    id: Categories | 0;
     icon: IconDefinition;
   }
 
@@ -23,46 +24,71 @@ const Menu: React.FC = () => {
     {
       name: "Todos",
       icon: faCookieBite,
-      id: 1,
+      id: 0,
     },
     {
       name: "Sanduíches",
       icon: faBurger,
-      id: 2,
+      id: Categories.Sandwiches,
     },
     {
       name: "Pizzas",
       icon: faPizzaSlice,
-      id: 3,
+      id: Categories.Pizzas,
     },
     {
       name: "Saudável",
       icon: faAppleWhole,
-      id: 4,
+      id: Categories.Healthy,
     },
     {
       name: "Vegetariano",
       icon: faCarrot,
-      id: 5,
+      id: Categories.Vegan,
     },
     {
       name: "Sobremesas",
       icon: faCandyCane,
-      id: 6,
+      id: Categories.Desserts,
     },
     {
       name: "Bebidas",
       icon: faMartiniGlassCitrus,
-      id: 7,
+      id: Categories.Drinks,
     },
     {
       name: "Outros",
       icon: faBowlRice,
-      id: 8,
+      id: Categories.Others,
     },
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState(1);
+  const [selectedCategories, setSelectedCategories] = useState<
+    Array<Categories | 0>
+  >([0]);
+
+  const checkSelectedCategory = (category: Categories | 0) => {
+    if (!category) {
+      setSelectedCategories([0]);
+      return;
+    }
+
+    const categoryIsAlreadySelected = selectedCategories.find(
+      (catId) => catId === category
+    );
+
+    if (categoryIsAlreadySelected) {
+      setSelectedCategories((currState) => {
+        const newCurrState = currState.filter((catId) => catId !== category);
+        return !newCurrState.length ? [0] : newCurrState;
+      });
+    } else {
+      setSelectedCategories((currState) => {
+        const newCurrState = currState.filter((catId) => catId !== 0);
+        return [...newCurrState, category];
+      });
+    }
+  };
 
   return (
     <div>
@@ -87,9 +113,9 @@ const Menu: React.FC = () => {
         {categories.map((item) => (
           <li key={item.id}>
             <button
-              onClick={() => setSelectedCategory(item.id)}
-              className={`py-2 px-4 rounded-sm flex flex-col gap-2 items-center justify-center  ${
-                selectedCategory === item.id
+              onClick={() => checkSelectedCategory(item.id)}
+              className={`py-2 px-4 rounded-sm flex flex-col gap-2 items-center justify-center ${
+                selectedCategories.includes(item.id)
                   ? "bg-red-theme text-white-beige hover:bg-red-theme"
                   : "hover:bg-neutral-200/[.4]"
               }`}
