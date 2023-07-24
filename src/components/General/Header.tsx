@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 
 const Header: React.FC = () => {
   return (
-    <header className="flex items-center py-2">
+    <header className="flex items-center py-1">
       <NavLinks className="flex-1" />
       <h1 className="text-xl font-bold flex-1 text-center">LOGO</h1>
       <div className="flex-1 flex items-center gap-6 justify-end">

@@ -33,3 +33,7 @@ ul {
 .button {
   @apply bg-red-theme px-9 py-4 rounded-sm table text-white-beige hover:bg-red-hover;
 }
+
+input {
+  @apply outline-blue-500 text-neutral-700;
+}
