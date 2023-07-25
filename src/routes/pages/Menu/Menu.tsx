@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Categories from "../../../types/enums/categories";
+import Results from "../../../components/Menu/Results";
 
 const Menu: React.FC = () => {
   interface category {
@@ -126,6 +127,7 @@ const Menu: React.FC = () => {
           </li>
         ))}
       </ul>
+      <Results />
     </div>
   );
 };
