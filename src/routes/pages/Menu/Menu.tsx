@@ -100,12 +100,12 @@ const Menu: React.FC = () => {
           <div className="flex items-center">
             <input
               placeholder="R$ 0,00"
-              className="w-20 p-1 border-b border-neutral-600 bg-transparent placeholder:text-neutral-600"
+              className="w-20 p-1 border-x-transparent border-b border-t-transparent border-neutral-600 bg-transparent placeholder:text-neutral-600"
             />
             <p className="mx-2">até</p>
             <input
               placeholder="R$ 0,00"
-              className="w-20 p-1 border-b border-neutral-600 bg-transparent placeholder:text-neutral-600"
+              className="w-20 p-1 border-x-transparent border-b border-t-transparent border-neutral-600 bg-transparent placeholder:text-neutral-600"
             />
           </div>
         </div>

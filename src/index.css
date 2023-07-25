@@ -35,5 +35,15 @@ ul {
 }
 
 input {
-  @apply outline-blue-500 text-neutral-700;
+  @apply outline-none border-2 border-transparent rounded-sm focus:border-blue-500 text-neutral-700 hover:border-neutral-300;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
