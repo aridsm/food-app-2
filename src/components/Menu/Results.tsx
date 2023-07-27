@@ -17,7 +17,6 @@ const Results: React.FC = () => {
   const [shownMenuItems, setShownMenuItems] = useState<MenuItem[]>(() =>
     menuItemsList.slice(0, itemsPerPage)
   );
-  const [totalItems, setTotalItems] = useState<number>(menuItems.length);
   const [page, setPage] = useState<Page>({
     currentPage: 1,
     totalPages: 1,
@@ -25,14 +24,14 @@ const Results: React.FC = () => {
 
   useEffect(() => {
     setPage((state: Page) => {
-      const totalPages = Math.floor(totalItems / itemsPerPage);
+      const totalPages = Math.floor(menuItemsList.length / itemsPerPage);
       return { ...state, totalPages };
     });
-  }, [totalItems]);
+  }, [menuItemsList]);
 
   useEffect(() => {
     setShownMenuItems(() => {
-      const firstIndexToShow = (page.currentPage - 1) * itemsPerPage;
+      const firstIndexToShow: number = (page.currentPage - 1) * itemsPerPage;
       return menuItemsList.slice(
         firstIndexToShow,
         itemsPerPage + firstIndexToShow
@@ -67,7 +66,9 @@ const Results: React.FC = () => {
         <div className="text-neutral-400 flex-1">
           Página {page.currentPage} de {page.totalPages}
         </div>
-        <div className="flex-1 text-center">{totalItems} resultados</div>
+        <div className="flex-1 text-center">
+          {menuItemsList.length} resultados
+        </div>
         <div className="flex items-center flex-1 text-end gap-1">
           <button
             disabled={page.currentPage === 1}
