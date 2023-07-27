@@ -75,6 +75,7 @@ const Menu: React.FC = () => {
     Array<Categories | 0>
   >([0]);
   const [isMoving, setIsMoving] = useState<boolean>(false);
+  const [movingStarted, setMovingStarted] = useState<boolean>(false);
   const [positions, setPositions] = useState<positions>({
     initial: 0,
     final: 0,
@@ -108,13 +109,15 @@ const Menu: React.FC = () => {
   };
 
   const mouseDownAction = (e: React.MouseEvent) => {
-    setIsMoving(true);
+    setMovingStarted(true);
     setPositions((currState) => ({ ...currState, initial: e.clientX }));
     UlMenuList.current!.style.cursor = "grabbing";
   };
 
   const mouseMoveAction = (e: React.MouseEvent) => {
-    if (isMoving) {
+    if (movingStarted) {
+      setIsMoving(true);
+
       UlMenuList.current!.style.cursor = "grabbing";
 
       const minLeft =
@@ -122,7 +125,7 @@ const Menu: React.FC = () => {
         UlMenuList.current!.getBoundingClientRect().width;
 
       let left =
-        (e.clientX - positions.initial) * 1.5 + Number(positions.final);
+        (e.clientX - positions.initial) * 1.2 + Number(positions.final);
 
       if (left > 0) {
         left = 0;
@@ -148,6 +151,7 @@ const Menu: React.FC = () => {
 
   const endGrabbing = () => {
     setIsMoving(false);
+    setMovingStarted(false);
     setPositions((currState) => ({ ...currState, final: currState.current }));
     UlMenuList.current!.style.cursor = "grab";
   };
@@ -155,7 +159,7 @@ const Menu: React.FC = () => {
   return (
     <div>
       <div className="flex justify-between mb-2">
-        <h2>Categorias </h2>
+        <h2>Categorias</h2>
         <div className="flex items-center text-base gap-4 text-neutral-400 -mb-3">
           <p>Preço</p>
           <div className="flex items-center">
