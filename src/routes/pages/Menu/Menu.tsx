@@ -1,25 +1,9 @@
-import {
-  IconDefinition,
-  faAppleWhole,
-  faBowlRice,
-  faBurger,
-  faCandyCane,
-  faCarrot,
-  faCookieBite,
-  faMartiniGlassCitrus,
-  faPizzaSlice,
-} from "@fortawesome/free-solid-svg-icons";
 import { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Categories from "../../../types/enums/categories";
 import Results from "../../../components/Menu/Results";
 import classes from "./Menu.module.css";
-
-interface category {
-  name: string;
-  id: Categories | 0;
-  icon: IconDefinition;
-}
+import categories from "../../../store/categories";
 
 interface positions {
   initial: number;
@@ -28,49 +12,6 @@ interface positions {
 }
 
 const Menu: React.FC = () => {
-  const categories: category[] = [
-    {
-      name: "Todos",
-      icon: faCookieBite,
-      id: 0,
-    },
-    {
-      name: "Sanduíches",
-      icon: faBurger,
-      id: Categories.Sandwiches,
-    },
-    {
-      name: "Pizzas",
-      icon: faPizzaSlice,
-      id: Categories.Pizzas,
-    },
-    {
-      name: "Saudável",
-      icon: faAppleWhole,
-      id: Categories.Healthy,
-    },
-    {
-      name: "Vegetariano",
-      icon: faCarrot,
-      id: Categories.Vegan,
-    },
-    {
-      name: "Sobremesas",
-      icon: faCandyCane,
-      id: Categories.Desserts,
-    },
-    {
-      name: "Bebidas",
-      icon: faMartiniGlassCitrus,
-      id: Categories.Drinks,
-    },
-    {
-      name: "Outros",
-      icon: faBowlRice,
-      id: Categories.Others,
-    },
-  ];
-
   const [selectedCategories, setSelectedCategories] = useState<
     Array<Categories | 0>
   >([0]);
@@ -116,8 +57,6 @@ const Menu: React.FC = () => {
 
   const mouseMoveAction = (e: React.MouseEvent) => {
     if (movingStarted) {
-      setIsMoving(true);
-
       UlMenuList.current!.style.cursor = "grabbing";
 
       const minLeft =
@@ -154,6 +93,10 @@ const Menu: React.FC = () => {
     setMovingStarted(false);
     setPositions((currState) => ({ ...currState, final: currState.current }));
     UlMenuList.current!.style.cursor = "grab";
+  };
+
+  const onDeleteCategory = (id: Categories) => {
+    checkSelectedCategory(id);
   };
 
   return (
@@ -210,7 +153,12 @@ const Menu: React.FC = () => {
           ))}
         </ul>
       </div>
-      <Results />
+      <Results
+        selectedCategories={
+          selectedCategories.filter((item) => item !== 0) as Categories[]
+        }
+        onDeleteCategory={onDeleteCategory}
+      />
     </div>
   );
 };

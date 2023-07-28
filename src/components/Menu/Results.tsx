@@ -4,6 +4,9 @@ import MenuItem from "../../types/interfaces/menuItem";
 import classes from "./Results.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import Chip from "./Chip";
+import Categories from "../../types/enums/categories";
+import categories from "../../store/categories";
 
 interface Page {
   currentPage: number;
@@ -12,7 +15,10 @@ interface Page {
 
 const itemsPerPage = 9;
 
-const Results: React.FC = () => {
+const Results: React.FC<{
+  selectedCategories: Categories[];
+  onDeleteCategory: (id: Categories) => void;
+}> = ({ selectedCategories, onDeleteCategory }) => {
   const [menuItemsList, setMenuItemsList] = useState<MenuItem[]>(menuItems);
   const [shownMenuItems, setShownMenuItems] = useState<MenuItem[]>(() =>
     menuItemsList.slice(0, itemsPerPage)
@@ -41,8 +47,10 @@ const Results: React.FC = () => {
 
   const onChangePage = (value: string) => {
     setPage((state: Page) => {
-      const pageSelected: number =
+      let pageSelected: number =
         Number(value) > page.totalPages ? page.totalPages : Number(value);
+
+      pageSelected = pageSelected <= 0 ? 1 : pageSelected;
 
       return { ...state, currentPage: pageSelected };
     });
@@ -58,6 +66,12 @@ const Results: React.FC = () => {
     setPage((state: Page) => {
       return { ...state, currentPage: state.currentPage + 1 };
     });
+  };
+
+  const getCategoryName = (id: Categories) => {
+    const currCategory = categories.find((category) => category.id === id);
+
+    return currCategory?.name || "";
   };
 
   return (
@@ -94,6 +108,18 @@ const Results: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {!!selectedCategories.length && (
+        <div className="mb-6 flex gap-4 flex-wrap">
+          {selectedCategories.map((category) => (
+            <Chip
+              title={getCategoryName(category)}
+              key={category}
+              action={() => onDeleteCategory(category)}
+            />
+          ))}
+        </div>
+      )}
 
       <ul className="grid grid-cols-3 gap-16">
         {shownMenuItems.map((item) => (
