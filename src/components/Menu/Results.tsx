@@ -7,6 +7,8 @@ import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import Chip from "./Chip";
 import Categories from "../../types/enums/categories";
 import categories from "../../store/categories";
+import { useAppDispatch } from "../../store/hooks";
+import { modalActions } from "../../store/modalStore.store";
 
 interface Page {
   currentPage: number;
@@ -19,6 +21,8 @@ const Results: React.FC<{
   selectedCategories: Categories[];
   onDeleteCategory: (id: Categories) => void;
 }> = ({ selectedCategories, onDeleteCategory }) => {
+  const dispatch = useAppDispatch();
+
   const [menuItemsList, setMenuItemsList] = useState<MenuItem[]>(menuItems);
   const [shownMenuItems, setShownMenuItems] = useState<MenuItem[]>(() =>
     menuItemsList.slice(0, itemsPerPage)
@@ -74,6 +78,17 @@ const Results: React.FC<{
     return currCategory?.name || "";
   };
 
+  const openModalItemMenu = (item: MenuItem) => {
+    dispatch(modalActions.openModal(item));
+  };
+
+  const convertToCurrency = (val: number) => {
+    return val.toLocaleString("pt-br", {
+      style: "currency",
+      currency: "BRL",
+    });
+  };
+
   return (
     <div className="text-base">
       <div className="flex justify-between items-center my-6">
@@ -126,6 +141,7 @@ const Results: React.FC<{
           <li key={item.id}>
             <button
               className={`bg-neutral-50 p-3 rounded-md text-left w-fit ${classes.card}`}
+              onClick={() => openModalItemMenu(item)}
             >
               <div className="w-full h-52 rounded-md overflow-hidden mb-3">
                 <img
@@ -139,7 +155,7 @@ const Results: React.FC<{
                 {item.description}
               </p>
               <div className="flex items-center justify-between">
-                <div>R$ 20,00</div>
+                <div>{convertToCurrency(item.price)}</div>
                 <button
                   className="button p-0"
                   style={{ padding: "0.4rem 1rem" }}
