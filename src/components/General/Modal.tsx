@@ -3,6 +3,7 @@ import MenuItem from "../../types/interfaces/menuItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import CartItem from "../../types/CartItem";
 
 const modalElement = document.getElementById("modal")! as HTMLElement;
 
@@ -11,7 +12,8 @@ const maxQuantity = 20;
 const ModalContent: React.FC<{
   onClose: () => void;
   item: MenuItem;
-}> = ({ onClose, item }) => {
+  addItemToCart: (item: CartItem) => void;
+}> = ({ onClose, item, addItemToCart }) => {
   const [quantity, setQuantity] = useState<number>(1);
 
   const closeModalHandler = (event: React.MouseEvent) => {
@@ -58,17 +60,25 @@ const ModalContent: React.FC<{
     });
   };
 
+  const addItem = () => {
+    console.log(item, quantity);
+    addItemToCart({
+      ...item,
+      quantity: quantity,
+    });
+  };
+
   return (
     <div
       className="fixed bg-slate-600/[.2] w-full h-full z-40 grid place-items-center px-2"
       onClick={closeModalHandler}
     >
       <section className="flex flex-col bg-white-beige rounded-lg p-5 w-[370px]">
-        <div className="h-60 w-full rounded-md overflow-hidden mb-3">
+        <div className="h-64 w-full rounded-md overflow-hidden mb-3">
           <img
             src={`/src/assets/imgs/imgs-menu/${item.imgPath}`}
             alt={item.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
         </div>
         <p className="text-center mb-2">{item.name}</p>
@@ -111,7 +121,11 @@ const ModalContent: React.FC<{
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </div>
-            <button className="button p-0" style={{ padding: "0.4rem 1rem" }}>
+            <button
+              className="button p-0"
+              style={{ padding: "0.4rem 1rem" }}
+              onClick={addItem}
+            >
               Adicionar ao carrinho
             </button>
           </div>
@@ -124,9 +138,10 @@ const ModalContent: React.FC<{
 const Modal: React.FC<{
   close: () => void;
   item: MenuItem;
-}> = ({ close, item }) => {
+  addItemToCart: (item: CartItem) => void;
+}> = ({ close, item, addItemToCart }) => {
   return ReactDOM.createPortal(
-    <ModalContent onClose={close} item={item} />,
+    <ModalContent onClose={close} item={item} addItemToCart={addItemToCart} />,
     modalElement
   );
 };
