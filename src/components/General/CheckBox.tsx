@@ -7,7 +7,7 @@ const CheckBox: React.FC<{
   className?: string;
 }> = ({ onSelect, selected, className }) => {
   return (
-    <div className={`w-20 flex justify-center ${className}`}>
+    <div className={`w-16 flex justify-start ${className}`}>
       <button
         className="rounded-sm w-[26px] h-[26px] p-1 border border-neutral-400 "
         onClick={onSelect}
