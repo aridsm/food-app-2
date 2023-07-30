@@ -15,10 +15,14 @@ const Header: React.FC = () => {
       <NavLinks className="flex-1" />
       <h1 className="text-xl font-bold flex-1 text-center">LOGO</h1>
       <div className="flex-1 flex items-center gap-6 justify-end">
-        <button>
+        <button title="Procurar item">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
-        <NavLink to="/cart" className="flex items-center gap-2">
+        <NavLink
+          to="/cart"
+          className="flex items-center gap-2"
+          title="Carrinho"
+        >
           <FontAwesomeIcon icon={faCartShopping} />
           <div className="bg-neutral-200/[.5] text-neutral-500 text-base rounded-sm px-2">
             {cart.totalItems}

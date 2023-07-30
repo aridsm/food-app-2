@@ -18,14 +18,12 @@ const cartSlice = createSlice({
       );
 
       if (indexItem >= 0) {
-        state.cartItems[indexItem].quantity = item.payload.quantity;
+        state.cartItems[indexItem].quantity += item.payload.quantity;
       } else {
         state.cartItems = [...state.cartItems, item.payload];
       }
       state.totalItems += item.payload.quantity;
       state.totalPrice += item.payload.quantity * item.payload.price;
-
-      console.log(state.cartItems);
     },
     removeOneItemFromCart(state, item: PayloadAction<MenuItem>) {
       const indexItem: number = state.cartItems.findIndex(
@@ -48,6 +46,22 @@ const cartSlice = createSlice({
       state.cartItems = state.cartItems.filter(
         (cartItem) => cartItem.id !== id.payload
       );
+    },
+    setNewQuantity(
+      state,
+      item: PayloadAction<{ id: number; newQuantity: number }>
+    ) {
+      const itemCart: CartItem = state.cartItems.find(
+        (cartItem) => cartItem.id === item.payload.id
+      )!;
+
+      state.totalPrice -= itemCart.quantity * itemCart.price;
+      state.totalItems -= itemCart.quantity;
+
+      itemCart.quantity = item.payload.newQuantity;
+
+      state.totalPrice += item.payload.newQuantity * itemCart.price;
+      state.totalItems += item.payload.newQuantity;
     },
     cleanCart(state) {
       state.cartItems = [];
