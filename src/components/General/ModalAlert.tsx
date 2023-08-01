@@ -7,7 +7,7 @@ import {
   faCircleExclamation,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import classes from "./ModalAlert.module.css";
 
 const modalElement = document.getElementById("modalAlert")! as HTMLElement;
@@ -19,6 +19,7 @@ const ModalContent: React.FC<{
   open: boolean;
 }> = ({ onClose, message, color, open }) => {
   const [currentIcon, setCurrentIcon] = useState<IconDefinition>(faCircleCheck);
+  const refTimer = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
     if (color === ColorsAlerts.Alert) {
@@ -31,10 +32,10 @@ const ModalContent: React.FC<{
   }, [color]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    refTimer.current = setTimeout(() => {
       onClose();
     }, 2000);
-    return () => clearTimeout(timer);
+    return () => clearTimeout(refTimer.current);
   }, [onClose]);
 
   return (

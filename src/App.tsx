@@ -26,7 +26,14 @@ function App() {
     dispatch(cartActions.onAddItemToCart(item));
 
     if (selectedItemInCart) {
-      if (selectedItemInCart.quantity + item.quantity > 20) {
+      if (selectedItemInCart.quantity === 20) {
+        dispatch(
+          modalActions.openModalAlert({
+            message: `Não há mais "${item.name}" disponíveis!`,
+            color: ColorsAlerts.Danger,
+          })
+        );
+      } else if (selectedItemInCart.quantity + item.quantity > 20) {
         const qtAdded = 20 - selectedItemInCart.quantity;
         dispatch(
           modalActions.openModalAlert({
@@ -34,11 +41,11 @@ function App() {
             color: ColorsAlerts.Alert,
           })
         );
-      } else if (selectedItemInCart.quantity === 20) {
+      } else {
         dispatch(
           modalActions.openModalAlert({
-            message: `Não há mais "${item.name}" disponíveis!`,
-            color: ColorsAlerts.Danger,
+            message: `${item.quantity} "${item.name}" foi adicionado(a) ao carrinho!`,
+            color: ColorsAlerts.Success,
           })
         );
       }
@@ -58,9 +65,9 @@ function App() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
+      <p className="text-end">{modal.modalAlert.message}</p>
       <Content />
       <ArcSvg className="absolute top-0 -right-[125px] rotate-180 -z-10" />
-
       {modal.modalOpen && (
         <Modal
           close={onCloseModal}
@@ -68,7 +75,6 @@ function App() {
           addItemToCart={addItemToCart}
         />
       )}
-
       <ModalAlert
         close={onCloseModalAlert}
         message={modal.modalAlert.message}

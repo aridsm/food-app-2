@@ -16,11 +16,14 @@ const cartSlice = createSlice({
       const cartItemSelected: CartItem | undefined = state.cartItems.find(
         (cartItem) => cartItem.id === item.payload.id
       );
+      let qtToAdd = item.payload.quantity;
 
       if (cartItemSelected) {
         const qtIsGreaterThanMaximum =
           cartItemSelected.quantity + item.payload.quantity > 20;
+
         if (qtIsGreaterThanMaximum) {
+          qtToAdd = 20 - cartItemSelected.quantity;
           cartItemSelected.quantity = 20;
         } else {
           cartItemSelected.quantity += item.payload.quantity;
@@ -28,7 +31,7 @@ const cartSlice = createSlice({
       } else {
         state.cartItems = [...state.cartItems, item.payload];
       }
-      state.totalItems += item.payload.quantity;
+      state.totalItems += qtToAdd;
       state.totalPrice += item.payload.quantity * item.payload.price;
     },
     removeOneItemFromCart(state, item: PayloadAction<MenuItem>) {
