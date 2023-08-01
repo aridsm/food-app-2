@@ -5,9 +5,12 @@ import { useAppDispatch, useAppSelector } from "./store/hooks.tsx";
 import { modalActions } from "./store/modalStore.store.tsx";
 import { cartActions } from "./store/cartStore.store.tsx";
 import CartItem from "./types/CartItem.tsx";
+import ModalAlert from "./components/General/ModalAlert.tsx";
+import ColorsAlerts from "./types/enums/colorsAlert.tsx";
 
 function App() {
   const modal = useAppSelector((state) => state.modal);
+  const cart = useAppSelector((state) => state.cart);
 
   const dispatch = useAppDispatch();
 
@@ -16,7 +19,41 @@ function App() {
   };
 
   const addItemToCart = (item: CartItem) => {
+    const selectedItemInCart: CartItem | undefined = cart.cartItems.find(
+      (cartItem) => cartItem.id === item.id
+    );
+
     dispatch(cartActions.onAddItemToCart(item));
+
+    if (selectedItemInCart) {
+      if (selectedItemInCart.quantity + item.quantity > 20) {
+        const qtAdded = 20 - selectedItemInCart.quantity;
+        dispatch(
+          modalActions.openModalAlert({
+            message: `Quantidade adicionada maior do que a disponível! ${qtAdded} "${item.name}" foi adicionado(a) ao carrinho!`,
+            color: ColorsAlerts.Alert,
+          })
+        );
+      } else if (selectedItemInCart.quantity === 20) {
+        dispatch(
+          modalActions.openModalAlert({
+            message: `Não há mais "${item.name}" disponíveis!`,
+            color: ColorsAlerts.Danger,
+          })
+        );
+      }
+    } else {
+      dispatch(
+        modalActions.openModalAlert({
+          message: `${item.quantity} "${item.name}" foi adicionado(a) ao carrinho!`,
+          color: ColorsAlerts.Success,
+        })
+      );
+    }
+  };
+
+  const onCloseModalAlert = () => {
+    dispatch(modalActions.closeModalAlert());
   };
 
   return (
@@ -31,6 +68,13 @@ function App() {
           addItemToCart={addItemToCart}
         />
       )}
+
+      <ModalAlert
+        close={onCloseModalAlert}
+        message={modal.modalAlert.message}
+        color={modal.modalAlert.color as ColorsAlerts}
+        open={modal.modalAlert.open}
+      />
     </div>
   );
 }

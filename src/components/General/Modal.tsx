@@ -31,6 +31,8 @@ const ModalContent: React.FC<{
       ...item,
       quantity: quantity,
     });
+
+    onClose();
   };
 
   return (

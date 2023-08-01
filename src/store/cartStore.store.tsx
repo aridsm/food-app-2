@@ -13,12 +13,18 @@ const cartSlice = createSlice({
   initialState: initialState,
   reducers: {
     onAddItemToCart(state, item: PayloadAction<CartItem>) {
-      const indexItem: number = state.cartItems.findIndex(
+      const cartItemSelected: CartItem | undefined = state.cartItems.find(
         (cartItem) => cartItem.id === item.payload.id
       );
 
-      if (indexItem >= 0) {
-        state.cartItems[indexItem].quantity += item.payload.quantity;
+      if (cartItemSelected) {
+        const qtIsGreaterThanMaximum =
+          cartItemSelected.quantity + item.payload.quantity > 20;
+        if (qtIsGreaterThanMaximum) {
+          cartItemSelected.quantity = 20;
+        } else {
+          cartItemSelected.quantity += item.payload.quantity;
+        }
       } else {
         state.cartItems = [...state.cartItems, item.payload];
       }
