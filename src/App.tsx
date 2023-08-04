@@ -7,12 +7,25 @@ import { cartActions } from "./store/cartStore.store.tsx";
 import CartItem from "./types/CartItem.tsx";
 import ModalAlert from "./components/General/ModalAlert.tsx";
 import ColorsAlerts from "./types/enums/colorsAlert.tsx";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { searchActions } from "./store/searchStore.store.tsx";
 
 function App() {
   const modal = useAppSelector((state) => state.modal);
   const cart = useAppSelector((state) => state.cart);
 
   const dispatch = useAppDispatch();
+  const params = useLocation();
+
+  useEffect(() => {
+    const URLSearchQuery = new URLSearchParams(params.search);
+    const searchQuery = URLSearchQuery.get("search");
+
+    if (searchQuery) {
+      dispatch(searchActions.setSearch(searchQuery));
+    }
+  }, [dispatch, params.search]);
 
   const onCloseModal = () => {
     dispatch(modalActions.closeModal());

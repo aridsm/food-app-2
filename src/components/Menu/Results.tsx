@@ -10,6 +10,7 @@ import categories from "../../store/categories";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { modalActions } from "../../store/modalStore.store";
 import { searchActions } from "../../store/searchStore.store";
+import { useNavigate } from "react-router-dom";
 
 interface Page {
   currentPage: number;
@@ -23,6 +24,7 @@ const Results: React.FC<{
   onDeleteCategory: (id: Categories) => void;
 }> = ({ selectedCategories, onDeleteCategory }) => {
   const search = useAppSelector((state) => state.search);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [menuItemsList, setMenuItemsList] = useState<MenuItem[]>(menuItems);
@@ -86,6 +88,10 @@ const Results: React.FC<{
 
   const onCleanSearch = () => {
     dispatch(searchActions.setSearch(""));
+    navigate({
+      pathname: "/menu",
+      search: undefined,
+    });
   };
 
   const convertToCurrency = (val: number) => {

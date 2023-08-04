@@ -3,6 +3,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { searchActions } from "../../store/searchStore.store";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -11,6 +12,7 @@ const SearchBar: React.FC = () => {
   const [searchBarVisible, setSearchBarVisible] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>(() => search.search);
   const searchRef = useRef<HTMLInputElement | null>(null);
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     if (searchBarVisible) {
@@ -23,6 +25,11 @@ const SearchBar: React.FC = () => {
   const searchProduct = () => {
     dispatch(searchActions.setSearch(searchValue));
     setSearchBarVisible(false);
+
+    navigate({
+      pathname: "/menu",
+      search: `?search=${searchValue}`,
+    });
   };
 
   useEffect(() => {
