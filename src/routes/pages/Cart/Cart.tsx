@@ -13,6 +13,7 @@ const Cart: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const [selectedItems, setSelectedItems] = useState<CartItem[]>([]);
+  const [currentTotal, setCurrentTotal] = useState<number>(0);
 
   const onSelectAllItems = () => {
     if (cart.cartItems.length !== selectedItems.length) {
@@ -25,6 +26,13 @@ const Cart: React.FC = () => {
   const deleteAllItems = () => {
     dispatch(cartActions.cleanCart());
     setSelectedItems([]);
+  };
+
+  const convertToCurrency = (val: number) => {
+    return val.toLocaleString("pt-br", {
+      style: "currency",
+      currency: "BRL",
+    });
   };
 
   return (
@@ -72,7 +80,7 @@ const Cart: React.FC = () => {
       <div className="flex justify-between items-end pt-4">
         <div>
           <p>Total</p>
-          <span className="text-3xl">R$ 50,92</span>
+          <span className="text-3xl">{convertToCurrency(currentTotal)}</span>
           <button
             className="text-red-theme flex gap-2 items-center mt-4 text-base"
             onClick={deleteAllItems}

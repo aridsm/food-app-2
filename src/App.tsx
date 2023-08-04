@@ -65,7 +65,6 @@ function App() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <p className="text-end">{modal.modalAlert.message}</p>
       <Content />
       <ArcSvg className="absolute top-0 -right-[125px] rotate-180 -z-10" />
       {modal.modalOpen && (

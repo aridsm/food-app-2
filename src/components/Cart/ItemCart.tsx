@@ -3,7 +3,7 @@ import { cartActions } from "../../store/cartStore.store";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import CartItem from "../../types/CartItem";
 import QuantitySelector from "../General/QuantitySelector";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import CheckBox from "../General/CheckBox";
 
