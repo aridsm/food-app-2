@@ -7,8 +7,9 @@ import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import Chip from "./Chip";
 import Categories from "../../types/enums/categories";
 import categories from "../../store/categories";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { modalActions } from "../../store/modalStore.store";
+import { searchActions } from "../../store/searchStore.store";
 
 interface Page {
   currentPage: number;
@@ -21,6 +22,7 @@ const Results: React.FC<{
   selectedCategories: Categories[];
   onDeleteCategory: (id: Categories) => void;
 }> = ({ selectedCategories, onDeleteCategory }) => {
+  const search = useAppSelector((state) => state.search);
   const dispatch = useAppDispatch();
 
   const [menuItemsList, setMenuItemsList] = useState<MenuItem[]>(menuItems);
@@ -82,6 +84,10 @@ const Results: React.FC<{
     dispatch(modalActions.openModal(item));
   };
 
+  const onCleanSearch = () => {
+    dispatch(searchActions.setSearch(""));
+  };
+
   const convertToCurrency = (val: number) => {
     return val.toLocaleString("pt-br", {
       style: "currency",
@@ -124,17 +130,18 @@ const Results: React.FC<{
         </div>
       </div>
 
-      {!!selectedCategories.length && (
-        <div className="mb-6 flex gap-4 flex-wrap">
-          {selectedCategories.map((category) => (
-            <Chip
-              title={getCategoryName(category)}
-              key={category}
-              action={() => onDeleteCategory(category)}
-            />
-          ))}
-        </div>
-      )}
+      <div className="mb-6 flex gap-4 flex-wrap">
+        {selectedCategories.map((category) => (
+          <Chip
+            title={getCategoryName(category)}
+            key={category}
+            action={() => onDeleteCategory(category)}
+          />
+        ))}
+        {search.search.length > 0 && (
+          <Chip title={search.search} action={onCleanSearch} />
+        )}
+      </div>
 
       <ul className="grid grid-cols-3 gap-16">
         {shownMenuItems.map((item) => (
