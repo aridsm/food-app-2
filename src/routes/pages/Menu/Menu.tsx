@@ -103,17 +103,19 @@ const Menu: React.FC = () => {
     <div>
       <div className="flex justify-between mb-2">
         <h2>Categorias</h2>
-        <div className="flex items-center text-base gap-4 text-neutral-400 -mb-3">
+        <div className="flex items-center text-base gap-4 text-neutral-400 -mb-3 z-10">
           <p>Preço</p>
           <div className="flex items-center">
             <input
               placeholder="R$ 0,00"
-              className="w-20 p-1 border-x-transparent border-b border-t-transparent border-neutral-600 bg-transparent placeholder:text-neutral-600"
+              type="number"
+              className="w-20 p-1 border-x-transparent border-b-2 border-t-transparent border-neutral-600 bg-transparent placeholder:text-neutral-600"
             />
             <p className="mx-2">até</p>
             <input
               placeholder="R$ 0,00"
-              className="w-20 p-1 border-x-transparent border-b border-t-transparent border-neutral-600 bg-transparent placeholder:text-neutral-600"
+              type="number"
+              className="w-20 p-1 border-x-transparent border-b-2 border-t-transparent border-neutral-600 bg-transparent placeholder:text-neutral-600"
             />
           </div>
         </div>

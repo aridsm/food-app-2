@@ -119,7 +119,7 @@ const Results: React.FC<{
 
     navigate({
       pathname: "/menu",
-      search: `?${searchQuery}&${pageQuery}`,
+      search: `?${searchQuery ? `${searchQuery}&` : ""}${pageQuery}`,
     });
   };
 

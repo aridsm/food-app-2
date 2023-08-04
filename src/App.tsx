@@ -80,13 +80,12 @@ function App() {
     <div className="min-h-screen relative overflow-hidden">
       <Content />
       <ArcSvg className="absolute top-0 -right-[125px] rotate-180 -z-10" />
-      {modal.modalOpen && (
-        <Modal
-          close={onCloseModal}
-          item={modal.item}
-          addItemToCart={addItemToCart}
-        />
-      )}
+      <Modal
+        close={onCloseModal}
+        item={modal.item}
+        addItemToCart={addItemToCart}
+        open={modal.modalOpen}
+      />
       <ModalAlert
         close={onCloseModalAlert}
         message={modal.modalAlert.message}

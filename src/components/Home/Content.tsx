@@ -34,7 +34,7 @@ const Content: React.FC = () => {
           <img src={img1} />
           <img src={img2} />
           <img src={img3} />
-          <p>+50 opções</p>
+          <p>+60 opções</p>
         </div>
       </div>
       <ul
