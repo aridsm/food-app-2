@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { cartActions } from "../../../store/cartStore.store";
 import { NavLink } from "react-router-dom";
+import convertToCurrency from "../../../utils/convertToCurrency";
 
 const Cart: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
@@ -26,13 +27,6 @@ const Cart: React.FC = () => {
   const deleteAllItems = () => {
     dispatch(cartActions.cleanCart());
     setSelectedItems([]);
-  };
-
-  const convertToCurrency = (val: number) => {
-    return val.toLocaleString("pt-br", {
-      style: "currency",
-      currency: "BRL",
-    });
   };
 
   return (

@@ -3,6 +3,7 @@ import MenuItem from "../../types/interfaces/menuItem";
 import { useState } from "react";
 import CartItem from "../../types/CartItem";
 import QuantitySelector from "./QuantitySelector";
+import convertToCurrency from "../../utils/convertToCurrency";
 
 const modalElement = document.getElementById("modal")! as HTMLElement;
 
@@ -17,13 +18,6 @@ const ModalContent: React.FC<{
     if (event.target === event.currentTarget) {
       onClose();
     }
-  };
-
-  const convertToCurrency = (val: number) => {
-    return val.toLocaleString("pt-br", {
-      style: "currency",
-      currency: "BRL",
-    });
   };
 
   const addItem = () => {

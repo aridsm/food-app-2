@@ -2,20 +2,16 @@ import { useState, useEffect } from "react";
 import menuItems from "../../store/menuList";
 import MenuItem from "../../types/interfaces/menuItem";
 import classes from "./Results.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import Chip from "./Chip";
 import Categories from "../../types/enums/categories";
 import categories from "../../store/categories";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { modalActions } from "../../store/modalStore.store";
 import { searchActions } from "../../store/searchStore.store";
-import { useNavigate } from "react-router-dom";
-
-interface Page {
-  currentPage: number;
-  totalPages: number;
-}
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Pagination from "./Pagination";
+import Page from "../../types/interfaces/page";
+import convertToCurrency from "../../utils/convertToCurrency";
 
 const itemsPerPage = 9;
 
@@ -27,6 +23,7 @@ const Results: React.FC<{
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const [searchParams] = useSearchParams();
   const [menuItemsList, setMenuItemsList] = useState<MenuItem[]>(menuItems);
   const [shownMenuItems, setShownMenuItems] = useState<MenuItem[]>(() =>
     menuItemsList.slice(0, itemsPerPage)
@@ -39,9 +36,16 @@ const Results: React.FC<{
   useEffect(() => {
     setPage((state: Page) => {
       const totalPages = Math.floor(menuItemsList.length / itemsPerPage);
-      return { ...state, totalPages };
+
+      const pageSearch = searchParams.get("page");
+
+      const page = pageSearch
+        ? { currentPage: Number(pageSearch) }
+        : { currentPage: state.currentPage };
+
+      return { ...page, totalPages };
     });
-  }, [menuItemsList]);
+  }, [menuItemsList, searchParams]);
 
   useEffect(() => {
     setShownMenuItems(() => {
@@ -53,32 +57,43 @@ const Results: React.FC<{
     });
   }, [menuItemsList, page.currentPage]);
 
+  const toTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const onChangePage = (value: string) => {
     setPage((state: Page) => {
       let pageSelected: number =
         Number(value) > page.totalPages ? page.totalPages : Number(value);
 
       pageSelected = pageSelected <= 0 ? 1 : pageSelected;
-
       return { ...state, currentPage: pageSelected };
     });
+    toTop();
+    setQueryParamPage(value);
   };
 
   const toPrevious = () => {
     setPage((state: Page) => {
       return { ...state, currentPage: state.currentPage - 1 };
     });
+    toTop();
+    setQueryParamPage(page.currentPage - 1);
   };
 
   const toNextPage = () => {
     setPage((state: Page) => {
       return { ...state, currentPage: state.currentPage + 1 };
     });
+    toTop();
+    setQueryParamPage(page.currentPage + 1);
   };
 
   const getCategoryName = (id: Categories) => {
     const currCategory = categories.find((category) => category.id === id);
-
     return currCategory?.name || "";
   };
 
@@ -87,69 +102,52 @@ const Results: React.FC<{
   };
 
   const onCleanSearch = () => {
+    const pageSearch = searchParams.get("page");
+
     dispatch(searchActions.setSearch(""));
     navigate({
       pathname: "/menu",
-      search: undefined,
+      search: `?page=${pageSearch}`,
     });
   };
 
-  const convertToCurrency = (val: number) => {
-    return val.toLocaleString("pt-br", {
-      style: "currency",
-      currency: "BRL",
+  const setQueryParamPage = (value: string | number) => {
+    const searchSearch = searchParams.get("search");
+
+    const searchQuery = `${searchSearch ? `search=${searchSearch}` : ""}`;
+    const pageQuery = `page=${value}`;
+
+    navigate({
+      pathname: "/menu",
+      search: `?${searchQuery}&${pageQuery}`,
     });
   };
 
   return (
     <div className="text-base">
-      <div className="flex justify-between items-center my-6">
-        <div className="text-neutral-400 flex-1">
-          Página {page.currentPage} de {page.totalPages}
+      <Pagination
+        onChangePage={onChangePage}
+        toPrevious={toPrevious}
+        toNextPage={toNextPage}
+        page={page}
+        length={menuItemsList.length}
+      />
+      {(!!selectedCategories.length || !!search.search.length) && (
+        <div className="mb-6 flex gap-4 flex-wrap">
+          {selectedCategories.map((category) => (
+            <Chip
+              title={getCategoryName(category)}
+              key={category}
+              action={() => onDeleteCategory(category)}
+            />
+          ))}
+          {search.search.length > 0 && (
+            <Chip title={search.search} action={onCleanSearch} />
+          )}
         </div>
-        <div className="flex-1 text-center">
-          {menuItemsList.length} resultados
-        </div>
-        <div className="flex items-center flex-1 text-end gap-1">
-          <button
-            disabled={page.currentPage === 1}
-            className="text-red-theme px-3 hover:bg-neutral-200/[.4] rounded-sm ml-auto disabled:text-red-theme/[.2] disabled:cursor-not-allowed"
-            onClick={toPrevious}
-          >
-            <FontAwesomeIcon icon={faCaretLeft} />
-          </button>
-          <input
-            type="number"
-            value={page.currentPage}
-            className="px-2 py-1 w-12"
-            min="1"
-            max={page.totalPages}
-            onChange={(e) => onChangePage(e.target.value)}
-          />
-          <button
-            disabled={page.currentPage === page.totalPages}
-            className="text-red-theme px-3 hover:bg-neutral-200/[.4] rounded-sm disabled:text-red-theme/[.2] disabled:cursor-not-allowed"
-            onClick={toNextPage}
-          >
-            <FontAwesomeIcon icon={faCaretRight} />
-          </button>
-        </div>
-      </div>
+      )}
 
-      <div className="mb-6 flex gap-4 flex-wrap">
-        {selectedCategories.map((category) => (
-          <Chip
-            title={getCategoryName(category)}
-            key={category}
-            action={() => onDeleteCategory(category)}
-          />
-        ))}
-        {search.search.length > 0 && (
-          <Chip title={search.search} action={onCleanSearch} />
-        )}
-      </div>
-
-      <ul className="grid grid-cols-3 gap-16">
+      <ul className="grid grid-cols-3 gap-16 border-b border-neutral-200 pb-10">
         {shownMenuItems.map((item) => (
           <li key={item.id}>
             <button
@@ -180,6 +178,13 @@ const Results: React.FC<{
           </li>
         ))}
       </ul>
+      <Pagination
+        onChangePage={onChangePage}
+        toPrevious={toPrevious}
+        toNextPage={toNextPage}
+        page={page}
+        length={menuItemsList.length}
+      />
     </div>
   );
 };

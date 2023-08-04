@@ -6,6 +6,7 @@ import QuantitySelector from "../General/QuantitySelector";
 import { useState, useEffect } from "react";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import CheckBox from "../General/CheckBox";
+import convertToCurrency from "../../utils/convertToCurrency";
 
 const ItemCart: React.FC<{
   item: CartItem;
@@ -37,13 +38,6 @@ const ItemCart: React.FC<{
       cartActions.setNewQuantity({ id: item.id, newQuantity: quantity })
     );
   }, [dispatch, item.id, quantity]);
-
-  const convertToCurrency = (val: number) => {
-    return val.toLocaleString("pt-br", {
-      style: "currency",
-      currency: "BRL",
-    });
-  };
 
   const onSelectItem = () => {
     const itemIsSelected = selectedItems.find(
