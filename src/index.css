@@ -35,7 +35,7 @@ ul {
 }
 
 input {
-  @apply outline-none border-2 rounded-sm focus:border-blue-500 text-neutral-700 border-neutral-200;
+  @apply outline-none border-2 rounded-sm focus:border-blue-500  text-neutral-700 border-neutral-200;
 }
 
 input::-webkit-outer-spin-button,

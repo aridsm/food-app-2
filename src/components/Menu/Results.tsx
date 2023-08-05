@@ -18,7 +18,14 @@ const itemsPerPage = 9;
 const Results: React.FC<{
   selectedCategories: Categories[];
   onDeleteCategory: (id: Categories) => void;
-}> = ({ selectedCategories, onDeleteCategory }) => {
+  priceRange: { min: number | ""; max: number | "" };
+  cleanPriceRange: () => void;
+}> = ({
+  selectedCategories,
+  onDeleteCategory,
+  priceRange,
+  cleanPriceRange,
+}) => {
   const search = useAppSelector((state) => state.search);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -132,7 +139,11 @@ const Results: React.FC<{
         page={page}
         length={menuItemsList.length}
       />
-      {(!!selectedCategories.length || !!search.search.length) && (
+
+      {(!!selectedCategories.length ||
+        !!search.search.length ||
+        priceRange.min ||
+        priceRange.max) && (
         <div className="mb-6 flex gap-4 flex-wrap">
           {selectedCategories.map((category) => (
             <Chip
@@ -143,6 +154,26 @@ const Results: React.FC<{
           ))}
           {search.search.length > 0 && (
             <Chip title={search.search} action={onCleanSearch} />
+          )}
+          {priceRange.min && priceRange.max && (
+            <Chip
+              title={`${convertToCurrency(
+                priceRange.min
+              )} - ${convertToCurrency(priceRange.max)}`}
+              action={cleanPriceRange}
+            />
+          )}
+          {priceRange.min && !priceRange.max && (
+            <Chip
+              title={`mínimo: ${convertToCurrency(priceRange.min)}`}
+              action={cleanPriceRange}
+            />
+          )}
+          {!priceRange.min && priceRange.max && (
+            <Chip
+              title={`máximo: ${convertToCurrency(priceRange.max)}`}
+              action={cleanPriceRange}
+            />
           )}
         </div>
       )}
