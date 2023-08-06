@@ -1,4 +1,4 @@
-const setURLQueryParams = (params: { [key: string]: string }) => {
+const setURLQueryParams = (params: { [key: string]: string | undefined }) => {
   const url = new URL(location.href);
   const queryParams = {} as { [key: string]: string };
 
@@ -10,7 +10,11 @@ const setURLQueryParams = (params: { [key: string]: string }) => {
 
   if (Object.keys(queryParams).length !== 0) {
     for (const key in queryParams) {
-      url.searchParams.set(key, queryParams[key]);
+      if (!queryParams[key] && url.searchParams.has(key)) {
+        url.searchParams.delete(key);
+      } else {
+        url.searchParams.set(key, queryParams[key]);
+      }
     }
   }
 

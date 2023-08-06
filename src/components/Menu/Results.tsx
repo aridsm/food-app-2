@@ -120,12 +120,10 @@ const Results: React.FC<{
   };
 
   const onCleanSearch = () => {
-    const pageSearch = searchParams.get("page");
-
     dispatch(searchActions.setSearch(""));
-    navigate({
-      pathname: "/menu",
-      search: `?page=${pageSearch}`,
+    setURLQueryParams({
+      page: "1",
+      search: undefined,
     });
   };
 
