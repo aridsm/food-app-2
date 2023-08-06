@@ -1,6 +1,6 @@
 import ItemCart from "../../../components/Cart/ItemCart";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CartItem from "../../../types/CartItem";
 import CheckBox from "../../../components/General/CheckBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,6 +16,17 @@ const Cart: React.FC = () => {
   const [selectedItems, setSelectedItems] = useState<CartItem[]>([]);
   const [currentTotal, setCurrentTotal] = useState<number>(0);
 
+  useEffect(() => {
+    const recountTotal = () => {
+      return selectedItems.reduce((acc, curr) => {
+        return acc + curr.price * curr.quantity;
+      }, 0);
+    };
+
+    setCurrentTotal(recountTotal());
+    console.log("set currr tottal");
+  }, [selectedItems]);
+
   const onSelectAllItems = () => {
     if (cart.cartItems.length !== selectedItems.length) {
       setSelectedItems(cart.cartItems);
@@ -27,6 +38,14 @@ const Cart: React.FC = () => {
   const deleteAllItems = () => {
     dispatch(cartActions.cleanCart());
     setSelectedItems([]);
+  };
+
+  const recountTotal = () => {
+    setCurrentTotal(
+      selectedItems.reduce((acc, curr) => {
+        return acc + curr.price;
+      }, 0)
+    );
   };
 
   return (
@@ -62,6 +81,7 @@ const Cart: React.FC = () => {
                 item={cartItem}
                 selectedItems={selectedItems}
                 setSelectedItems={setSelectedItems}
+                recountTotal={recountTotal}
               />
             ))}
           </ul>

@@ -8,7 +8,7 @@ import categories from "../../store/categories";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { modalActions } from "../../store/modalStore.store";
 import { searchActions } from "../../store/searchStore.store";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Pagination from "./Pagination";
 import Page from "../../types/interfaces/page";
 import convertToCurrency from "../../utils/convertToCurrency";
@@ -28,7 +28,6 @@ const Results: React.FC<{
   cleanPriceRange,
 }) => {
   const search = useAppSelector((state) => state.search);
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [searchParams] = useSearchParams();

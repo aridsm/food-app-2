@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { cartActions } from "../../store/cartStore.store";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppDispatch } from "../../store/hooks";
 import CartItem from "../../types/CartItem";
 import QuantitySelector from "../General/QuantitySelector";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import CheckBox from "../General/CheckBox";
 import convertToCurrency from "../../utils/convertToCurrency";
@@ -12,8 +12,8 @@ const ItemCart: React.FC<{
   item: CartItem;
   selectedItems: CartItem[];
   setSelectedItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
-}> = ({ item, selectedItems, setSelectedItems }) => {
-  const cart = useAppSelector((state) => state.cart);
+  recountTotal: () => void;
+}> = ({ item, selectedItems, setSelectedItems, recountTotal }) => {
   const dispatch = useAppDispatch();
 
   const [quantity, setQuantity] = useState<number>(item.quantity);
@@ -23,7 +23,30 @@ const ItemCart: React.FC<{
 
   useEffect(() => {
     setQuantity(item.quantity);
-  }, [item.quantity, item]);
+    dispatch(
+      cartActions.setNewQuantity({ id: item.id, newQuantity: quantity })
+    );
+    if (itemIsSelected) {
+      setSelectedItems((state) => {
+        return state.map((cartItem: CartItem) => {
+          if (cartItem.id === item.id) {
+            return {
+              ...cartItem,
+              quantity: quantity,
+            };
+          }
+          return cartItem;
+        });
+      });
+    }
+  }, [
+    dispatch,
+    item.id,
+    item.quantity,
+    itemIsSelected,
+    quantity,
+    setSelectedItems,
+  ]);
 
   useEffect(() => {
     setItemIsSelected(() => {
@@ -32,12 +55,6 @@ const ItemCart: React.FC<{
       );
     });
   }, [item.id, selectedItems]);
-
-  useEffect(() => {
-    dispatch(
-      cartActions.setNewQuantity({ id: item.id, newQuantity: quantity })
-    );
-  }, [dispatch, item.id, quantity]);
 
   const onSelectItem = () => {
     const itemIsSelected = selectedItems.find(
@@ -55,6 +72,10 @@ const ItemCart: React.FC<{
 
   const removeItemFromCart = () => {
     dispatch(cartActions.deleteItemFromCart(item.id));
+    setSelectedItems((currState: CartItem[]) => {
+      return currState.filter((selectedItem) => selectedItem.id !== item.id);
+    });
+    recountTotal();
   };
 
   return (
