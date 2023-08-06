@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { memo, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Categories from "../../../types/enums/categories";
 import Results from "../../../components/Menu/Results";
@@ -96,9 +96,11 @@ const Menu: React.FC = () => {
   };
 
   const endGrabbing = () => {
-    setIsMoving(false);
-    setMovingStarted(false);
-    setPositions((currState) => ({ ...currState, final: currState.current }));
+    if (movingStarted) setMovingStarted(false);
+    if (isMoving) {
+      setIsMoving(false);
+      setPositions((currState) => ({ ...currState, final: currState.current }));
+    }
     UlMenuList.current!.style.cursor = "grab";
   };
 
@@ -223,4 +225,4 @@ const Menu: React.FC = () => {
   );
 };
 
-export default Menu;
+export default memo(Menu);

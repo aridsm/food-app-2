@@ -1,14 +1,54 @@
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Page from "../../types/interfaces/page";
+import setURLQueryParams from "../../utils/queryParams";
 
 const Pagination: React.FC<{
-  onChangePage: (val: string) => void;
-  toPrevious: () => void;
-  toNextPage: () => void;
   page: Page;
   length: number;
-}> = ({ onChangePage, toPrevious, toNextPage, page, length }) => {
+  setPage: React.Dispatch<React.SetStateAction<Page>>;
+}> = ({ page, length, setPage }) => {
+  const onChangePage = (value: string) => {
+    setPage((state: Page) => {
+      let pageSelected: number =
+        Number(value) > page.totalPages ? page.totalPages : Number(value);
+
+      pageSelected = pageSelected <= 0 ? 1 : pageSelected;
+      return { ...state, currentPage: pageSelected };
+    });
+    toTop();
+    setQueryParamPage(value);
+  };
+
+  const toPrevious = () => {
+    setPage((state: Page) => {
+      return { ...state, currentPage: state.currentPage - 1 };
+    });
+    toTop();
+    setQueryParamPage(page.currentPage - 1);
+  };
+
+  const toNextPage = () => {
+    setPage((state: Page) => {
+      return { ...state, currentPage: state.currentPage + 1 };
+    });
+    toTop();
+    setQueryParamPage(page.currentPage + 1);
+  };
+
+  const setQueryParamPage = (value: string | number) => {
+    setURLQueryParams({
+      page: String(value),
+    });
+  };
+
+  const toTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="flex justify-between items-center my-6">
       <div className="text-neutral-400 flex-1">

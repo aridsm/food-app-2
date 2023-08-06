@@ -12,6 +12,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Pagination from "./Pagination";
 import Page from "../../types/interfaces/page";
 import convertToCurrency from "../../utils/convertToCurrency";
+import setURLQueryParams from "../../utils/queryParams";
 
 const itemsPerPage = 9;
 
@@ -36,68 +37,78 @@ const Results: React.FC<{
     menuItemsList.slice(0, itemsPerPage)
   );
   const [page, setPage] = useState<Page>({
-    currentPage: 1,
+    currentPage: Number(searchParams.get("page")) || 1,
     totalPages: 1,
   });
 
   useEffect(() => {
-    setPage((state: Page) => {
-      const totalPages = Math.floor(menuItemsList.length / itemsPerPage);
+    let itemsFiltered = menuItems;
 
-      const pageSearch = searchParams.get("page");
+    if (search.search.length) {
+      itemsFiltered = menuItems.filter((item: MenuItem) =>
+        item.name.toLowerCase().includes(search.search.toLowerCase())
+      );
+    }
 
-      const page = pageSearch
-        ? { currentPage: Number(pageSearch) }
-        : { currentPage: state.currentPage };
+    if (selectedCategories.length) {
+      itemsFiltered = itemsFiltered.filter((item: MenuItem) =>
+        selectedCategories.includes(item.category)
+      );
+    }
 
-      return { ...page, totalPages };
-    });
-  }, [menuItemsList, searchParams]);
+    if (priceRange.min || priceRange.max) {
+      itemsFiltered = itemsFiltered.filter((item: MenuItem) => {
+        if (priceRange.min && priceRange.max) {
+          if (item.price >= priceRange.min && item.price <= priceRange.max) {
+            return item;
+          }
+        } else if (priceRange.min && !priceRange.max) {
+          if (item.price >= priceRange.min) {
+            return item;
+          }
+        } else if (!priceRange.min && priceRange.max) {
+          if (item.price <= priceRange.max) {
+            return item;
+          }
+        }
+      });
+    }
+
+    setMenuItemsList(itemsFiltered);
+  }, [priceRange.max, priceRange.min, search.search, selectedCategories]);
 
   useEffect(() => {
-    setShownMenuItems(() => {
-      const firstIndexToShow: number = (page.currentPage - 1) * itemsPerPage;
-      return menuItemsList.slice(
-        firstIndexToShow,
-        itemsPerPage + firstIndexToShow
-      );
-    });
+    const firstIndexToShow: number = (page.currentPage - 1) * itemsPerPage;
+
+    const itemsShown = menuItemsList.slice(
+      firstIndexToShow,
+      itemsPerPage + firstIndexToShow
+    );
+
+    const totalPages = Math.ceil(menuItemsList.length / itemsPerPage);
+
+    if (!itemsShown.length) {
+      setPage(() => {
+        return {
+          currentPage: 1,
+          totalPages: totalPages,
+        };
+      });
+
+      setURLQueryParams({
+        page: "1",
+      });
+    } else {
+      setPage((state) => {
+        return {
+          ...state,
+          totalPages: totalPages,
+        };
+      });
+    }
+
+    setShownMenuItems(itemsShown);
   }, [menuItemsList, page.currentPage]);
-
-  const toTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  const onChangePage = (value: string) => {
-    setPage((state: Page) => {
-      let pageSelected: number =
-        Number(value) > page.totalPages ? page.totalPages : Number(value);
-
-      pageSelected = pageSelected <= 0 ? 1 : pageSelected;
-      return { ...state, currentPage: pageSelected };
-    });
-    toTop();
-    setQueryParamPage(value);
-  };
-
-  const toPrevious = () => {
-    setPage((state: Page) => {
-      return { ...state, currentPage: state.currentPage - 1 };
-    });
-    toTop();
-    setQueryParamPage(page.currentPage - 1);
-  };
-
-  const toNextPage = () => {
-    setPage((state: Page) => {
-      return { ...state, currentPage: state.currentPage + 1 };
-    });
-    toTop();
-    setQueryParamPage(page.currentPage + 1);
-  };
 
   const getCategoryName = (id: Categories) => {
     const currCategory = categories.find((category) => category.id === id);
@@ -118,27 +129,9 @@ const Results: React.FC<{
     });
   };
 
-  const setQueryParamPage = (value: string | number) => {
-    const searchSearch = searchParams.get("search");
-
-    const searchQuery = `${searchSearch ? `search=${searchSearch}` : ""}`;
-    const pageQuery = `page=${value}`;
-
-    navigate({
-      pathname: "/menu",
-      search: `?${searchQuery ? `${searchQuery}&` : ""}${pageQuery}`,
-    });
-  };
-
   return (
     <div className="text-base">
-      <Pagination
-        onChangePage={onChangePage}
-        toPrevious={toPrevious}
-        toNextPage={toNextPage}
-        page={page}
-        length={menuItemsList.length}
-      />
+      <Pagination setPage={setPage} page={page} length={menuItemsList.length} />
 
       {(!!selectedCategories.length ||
         !!search.search.length ||
@@ -179,43 +172,43 @@ const Results: React.FC<{
       )}
 
       <ul className="grid grid-cols-3 gap-16 border-b border-neutral-200 pb-10">
-        {shownMenuItems.map((item) => (
-          <li key={item.id}>
-            <button
-              className={`bg-neutral-50 p-3 rounded-md text-left w-fit ${classes.card}`}
-              onClick={() => openModalItemMenu(item)}
-            >
-              <div className="w-full h-52 rounded-md overflow-hidden mb-3">
-                <img
-                  src={`/src/assets/imgs/imgs-menu/${item.imgPath}`}
-                  alt={item.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p>{item.name}</p>
-              <p className="text-neutral-400 text-ellipsis overflow-hidden line-clamp-2 mb-5">
-                {item.description}
-              </p>
-              <div className="flex items-center justify-between">
-                <div>{convertToCurrency(item.price)}</div>
-                <button
-                  className="button p-0"
-                  style={{ padding: "0.4rem 1rem" }}
-                >
-                  Comprar
-                </button>
-              </div>
-            </button>
-          </li>
-        ))}
+        {shownMenuItems.length > 0 &&
+          shownMenuItems.map((item) => (
+            <li key={item.id}>
+              <button
+                className={`bg-neutral-50 p-3 rounded-md text-left w-fit ${classes.card}`}
+                onClick={() => openModalItemMenu(item)}
+              >
+                <div className="w-full h-52 rounded-md overflow-hidden mb-3">
+                  <img
+                    src={`/src/assets/imgs/imgs-menu/${item.imgPath}`}
+                    alt={item.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p>{item.name}</p>
+                <p className="text-neutral-400 text-ellipsis overflow-hidden line-clamp-2 mb-5">
+                  {item.description}
+                </p>
+                <div className="flex items-center justify-between">
+                  <div>{convertToCurrency(item.price)}</div>
+                  <div
+                    className="button p-0"
+                    style={{ padding: "0.4rem 1rem" }}
+                  >
+                    Comprar
+                  </div>
+                </div>
+              </button>
+            </li>
+          ))}
+        {menuItemsList.length === 0 && (
+          <p className="text-center mx-auto w-full col-span-3 py-28 text-neutral-400">
+            Não foi encontrado resultados para esse filtro!
+          </p>
+        )}
       </ul>
-      <Pagination
-        onChangePage={onChangePage}
-        toPrevious={toPrevious}
-        toNextPage={toNextPage}
-        page={page}
-        length={menuItemsList.length}
-      />
+      <Pagination setPage={setPage} page={page} length={menuItemsList.length} />
     </div>
   );
 };
