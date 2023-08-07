@@ -3,10 +3,11 @@ import { cartActions } from "../../store/cartStore.store";
 import { useAppDispatch } from "../../store/hooks";
 import CartItem from "../../types/CartItem";
 import QuantitySelector from "../General/QuantitySelector";
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect } from "react";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import CheckBox from "../General/CheckBox";
 import convertToCurrency from "../../utils/convertToCurrency";
+import ModalConfirm from "../General/ModalConfirm";
 
 const ItemCart: React.FC<{
   item: CartItem;
@@ -20,6 +21,15 @@ const ItemCart: React.FC<{
   const [itemIsSelected, setItemIsSelected] = useState<boolean>(
     () => !!selectedItems.find((selectedItem) => selectedItem.id === item.id)
   );
+  const [modalAlert, setModalAlert] = useState<{
+    open: boolean;
+    message: string;
+    onConfirm: (() => void) | undefined;
+  }>({
+    open: false,
+    message: "",
+    onConfirm: undefined,
+  });
 
   useEffect(() => {
     setQuantity(item.quantity);
@@ -78,47 +88,74 @@ const ItemCart: React.FC<{
     recountTotal();
   };
 
+  const onCloseModalAlert = () => {
+    setModalAlert((state) => {
+      return {
+        ...state,
+        open: false,
+      };
+    });
+  };
+
+  const onConfirmRemoveItemFromCart = () => {
+    setModalAlert(() => {
+      return {
+        open: true,
+        message: "Deseja realmente excluir o item selecionado?",
+        onConfirm: removeItemFromCart,
+      };
+    });
+  };
+
   return (
-    <li
-      key={item.id}
-      className={`flex text-base pt-4 ${
-        itemIsSelected ? "opacity-100" : "opacity-80"
-      }`}
-    >
-      <CheckBox
-        onSelect={onSelectItem}
-        selected={itemIsSelected}
-        className="self-center"
+    <div>
+      <ModalConfirm
+        close={onCloseModalAlert}
+        message={modalAlert.message}
+        open={modalAlert.open}
+        onConfirm={modalAlert.onConfirm}
       />
-      <div className="basis-36 h-32 rounded-md overflow-hidden mr-6">
-        <img
-          src={`/src/assets/imgs/imgs-menu/${item.imgPath}`}
-          alt={item.name}
-          className="w-full h-full object-cover"
+      <li
+        key={item.id}
+        className={`flex text-base pt-4 ${
+          itemIsSelected ? "opacity-100" : "opacity-80"
+        }`}
+      >
+        <CheckBox
+          onSelect={onSelectItem}
+          selected={itemIsSelected}
+          className="self-center"
         />
-      </div>
-      <div className="flex flex-1">
-        <div className="flex flex-col">
-          <p>{item.name}</p>
-          <span className="text-neutral-400">
-            Unid. {convertToCurrency(item.price)}
-          </span>
-          <button
-            className="text-red-theme flex gap-2 items-center mt-auto"
-            onClick={removeItemFromCart}
-          >
-            Remover
-            <FontAwesomeIcon icon={faTrashCan} />
-          </button>
+        <div className="basis-36 h-32 rounded-md overflow-hidden mr-6">
+          <img
+            src={`/src/assets/imgs/imgs-menu/${item.imgPath}`}
+            alt={item.name}
+            className="w-full h-full object-cover"
+          />
         </div>
-        <div className="w-48 ml-auto flex justify-center items-start pt-4">
-          <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+        <div className="flex flex-1">
+          <div className="flex flex-col">
+            <p>{item.name}</p>
+            <span className="text-neutral-400">
+              Unid. {convertToCurrency(item.price)}
+            </span>
+            <button
+              className="text-red-theme flex gap-2 items-center mt-auto"
+              onClick={onConfirmRemoveItemFromCart}
+            >
+              Remover
+              <FontAwesomeIcon icon={faTrashCan} />
+            </button>
+          </div>
+          <div className="w-48 ml-auto flex justify-center items-start pt-4">
+            <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+          </div>
+          <p className="w-48 text-end  pt-5">
+            {convertToCurrency(item.price * item.quantity)}
+          </p>
         </div>
-        <p className="w-48 text-end  pt-5">
-          {convertToCurrency(item.price * item.quantity)}
-        </p>
-      </div>
-    </li>
+      </li>
+    </div>
   );
 };
 
