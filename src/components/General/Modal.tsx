@@ -18,6 +18,7 @@ const ModalContent: React.FC<{
   const closeModalHandler = (event: React.MouseEvent) => {
     if (event.target === event.currentTarget) {
       onClose();
+      setQuantity(1);
     }
   };
 
