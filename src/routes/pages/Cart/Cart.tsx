@@ -6,13 +6,14 @@ import CheckBox from "../../../components/General/CheckBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { cartActions } from "../../../store/cartStore.store";
-import { NavLink } from "react-router-dom";
 import convertToCurrency from "../../../utils/convertToCurrency";
+import { useNavigate } from "react-router-dom";
 
 const Cart: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
+  const navigate = useNavigate();
   const [selectedItems, setSelectedItems] = useState<CartItem[]>([]);
   const [currentTotal, setCurrentTotal] = useState<number>(0);
 
@@ -24,7 +25,6 @@ const Cart: React.FC = () => {
     };
 
     setCurrentTotal(recountTotal());
-    console.log("set currr tottal");
   }, [selectedItems]);
 
   const onSelectAllItems = () => {
@@ -46,6 +46,18 @@ const Cart: React.FC = () => {
         return acc + curr.price;
       }, 0)
     );
+  };
+
+  const goToPaymentPage = () => {
+    dispatch(
+      cartActions.setSelectedItems({
+        items: selectedItems,
+        price: currentTotal,
+      })
+    );
+    navigate({
+      pathname: "/payment",
+    });
   };
 
   return (
@@ -103,9 +115,14 @@ const Cart: React.FC = () => {
             <FontAwesomeIcon icon={faTrashCan} />
           </button>
         </div>
-        <NavLink className="button" to="/payment">
+
+        <button
+          disabled={selectedItems.length === 0}
+          className="button"
+          onClick={goToPaymentPage}
+        >
           Continuar
-        </NavLink>
+        </button>
       </div>
     </div>
   );

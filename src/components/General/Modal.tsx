@@ -29,6 +29,7 @@ const ModalContent: React.FC<{
     });
 
     onClose();
+    setQuantity(1);
   };
 
   return (

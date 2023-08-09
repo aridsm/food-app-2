@@ -8,6 +8,8 @@ import {
   faMoneyBillTrendUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useAppSelector } from "../../../store/hooks";
+import convertToCurrency from "../../../utils/convertToCurrency";
 
 const payments: { name: string; id: Payments; icon: IconDefinition }[] = [
   {
@@ -33,6 +35,8 @@ const payments: { name: string; id: Payments; icon: IconDefinition }[] = [
 ];
 
 const Payment: React.FC = () => {
+  const cart = useAppSelector((state) => state.cart);
+
   const [formIsFilled, setFormIsFilled] = useState<boolean>(false);
   const [paymentSelected, setPaymentSelected] = useState<Payments | null>(null);
   const [formInputs, setFormInputs] = useState<{
@@ -48,6 +52,10 @@ const Payment: React.FC = () => {
     number: "",
     complement: "",
   });
+
+  const itemsCount = cart.selectedItems.reduce((acc, curr) => {
+    return curr.quantity + acc;
+  }, 0);
 
   useEffect(() => {
     if (
@@ -67,16 +75,40 @@ const Payment: React.FC = () => {
     <section className="flex gap-8 text-base items-start">
       <div className="flex flex-col gap-12 basis-[50%]">
         <section>
-          <p>Seu pedido</p>
+          <div className="mb-2 flex gap-2 items-center">
+            <p>Seu pedido</p>
+            <span className="text-sm text-neutral-400">
+              {itemsCount} item(ns)
+            </span>
+          </div>
+          <ul className="flex flex-col gap-4 divide-y-2 max-h-[300px] overflow-auto">
+            {cart.selectedItems.map((item) => (
+              <li className="flex gap-4 pt-4">
+                <div className="basis-20 h-20 rounded-md overflow-hidden">
+                  <img
+                    src={`/src/assets/imgs/imgs-menu/${item.imgPath}`}
+                    alt={item.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <span className="flex text-sm">
+                    <p className="mr-2">{item.name}</p>
+                    <p>x{item.quantity}</p>
+                  </span>
+                  <p className="mt-auto">
+                    {convertToCurrency(item.price * item.quantity)}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </section>
         <section>
           <p className="mb-4">Endereço de entrega</p>
           <form className="grid grid-cols-2 gap-4">
             <div className="col-span-1">
-              <label
-                htmlFor="cep"
-                className="text-neutral-400 uppercase text-xs"
-              >
+              <label htmlFor="cep" className=" uppercase text-xs">
                 CEP
               </label>
               <input
@@ -91,10 +123,7 @@ const Payment: React.FC = () => {
               />
             </div>
             <div className="col-span-1">
-              <label
-                htmlFor="district"
-                className="text-neutral-400 uppercase text-xs"
-              >
+              <label htmlFor="district" className=" uppercase text-xs">
                 Bairro
               </label>
               <input
@@ -112,10 +141,7 @@ const Payment: React.FC = () => {
               />
             </div>
             <div className="col-span-1">
-              <label
-                htmlFor="street"
-                className="text-neutral-400 uppercase text-xs"
-              >
+              <label htmlFor="street" className=" uppercase text-xs">
                 Rua
               </label>
               <input
@@ -130,10 +156,7 @@ const Payment: React.FC = () => {
               />
             </div>
             <div className="col-span-1">
-              <label
-                htmlFor="number"
-                className="text-neutral-400 uppercase text-xs"
-              >
+              <label htmlFor="number" className=" uppercase text-xs">
                 Número
               </label>
               <input
@@ -148,10 +171,7 @@ const Payment: React.FC = () => {
               />
             </div>
             <div className="col-span-2">
-              <label
-                htmlFor="comp"
-                className="text-neutral-400 uppercase text-xs"
-              >
+              <label htmlFor="comp" className=" uppercase text-xs">
                 Complemento
               </label>
               <input
@@ -178,7 +198,7 @@ const Payment: React.FC = () => {
                 <button
                   className={`${
                     paymentSelected === payment.id
-                      ? "text text-blue-500"
+                      ? "text-blue-500"
                       : "text-neutral-400 "
                   }`}
                   onClick={() => setPaymentSelected(payment.id)}
@@ -194,7 +214,7 @@ const Payment: React.FC = () => {
       <div className="flex-1 bg-neutral-50 p-5 rounded-md ml-12 card">
         <div className="flex justify-between items-center text-xl mb-6">
           <p>Total</p>
-          <p>R$ 25,99</p>
+          <p>{convertToCurrency(cart.totalPriceSelectedItems)}</p>
         </div>
         <div className="flex justify-between items-center mb-4">
           <p>Desconto</p>
@@ -212,10 +232,7 @@ const Payment: React.FC = () => {
               : ""}
           </p>
         </div>
-        <button
-          disabled={!formIsFilled}
-          className="button mt-4 w-full disabled:opacity-50 disabled:hover:bg-red-theme disabled:hover:cursor-not-allowed"
-        >
+        <button disabled={!formIsFilled} className="button mt-4 w-full">
           Concluir
         </button>
       </div>
