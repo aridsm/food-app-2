@@ -201,7 +201,7 @@ const Results: React.FC<{
           ))}
         {menuItemsList.length === 0 && (
           <p className="text-center mx-auto w-full col-span-3 py-28 text-neutral-400">
-            Não foi encontrado resultados para esse filtro!
+            Não foram encontrado resultados para este filtro!
           </p>
         )}
       </ul>

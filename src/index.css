@@ -31,7 +31,11 @@ ul {
 }
 
 .button {
-  @apply bg-red-theme px-9 py-4 rounded-sm table text-white-beige hover:bg-red-hover;
+  @apply bg-red-theme px-8 py-3 rounded-sm table text-white-beige hover:bg-red-hover;
+}
+
+.card {
+  box-shadow: 0 0 30px 0 #f0ede7;
 }
 
 input {

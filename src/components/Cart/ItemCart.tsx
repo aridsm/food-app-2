@@ -86,6 +86,7 @@ const ItemCart: React.FC<{
       return currState.filter((selectedItem) => selectedItem.id !== item.id);
     });
     recountTotal();
+    onCloseModalAlert();
   };
 
   const onCloseModalAlert = () => {
