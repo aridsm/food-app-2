@@ -99,8 +99,8 @@ const Menu: React.FC = () => {
     if (movingStarted) setMovingStarted(false);
     if (isMoving) {
       setIsMoving(false);
-      setPositions((currState) => ({ ...currState, final: currState.current }));
     }
+    setPositions((currState) => ({ ...currState, final: currState.current }));
     UlMenuList.current!.style.cursor = "grab";
   };
 
@@ -207,7 +207,9 @@ const Menu: React.FC = () => {
                 }`}
               >
                 <FontAwesomeIcon icon={item.icon} className="text-lg" />
-                <p>{item.name}</p>
+                <p className={isMoving ? "select-none" : "select-auto"}>
+                  {item.name}
+                </p>
               </button>
             </li>
           ))}
