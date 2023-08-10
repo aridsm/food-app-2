@@ -10,6 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppSelector } from "../../../store/hooks";
 import convertToCurrency from "../../../utils/convertToCurrency";
+import useFetch from "../../../hooks/useFetch";
 
 const payments: { name: string; id: Payments; icon: IconDefinition }[] = [
   {
@@ -37,6 +38,7 @@ const payments: { name: string; id: Payments; icon: IconDefinition }[] = [
 const Payment: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
 
+  const { data, error, loading, request } = useFetch();
   const [formIsFilled, setFormIsFilled] = useState<boolean>(false);
   const [paymentSelected, setPaymentSelected] = useState<Payments | null>(null);
   const [formInputs, setFormInputs] = useState<{
@@ -57,13 +59,36 @@ const Payment: React.FC = () => {
     return curr.quantity + acc;
   }, 0);
 
-  const onChangeCep = ({
+  const onChangeCep = async ({
     target,
   }: {
     target: EventTarget & HTMLInputElement;
   }) => {
     setFormInputs((state) => ({ ...state, cep: target.value }));
+    if (target.value.length === 8) {
+      await request(`https://viacep.com.br/ws/${target.value}/json/`);
+    }
   };
+
+  useEffect(() => {
+    if (data) {
+      setFormInputs((state) => {
+        return {
+          ...state,
+          district: data.bairro,
+          street: data.logradouro,
+        };
+      });
+    } else {
+      setFormInputs((state) => {
+        return {
+          ...state,
+          district: "",
+          street: "",
+        };
+      });
+    }
+  }, [data]);
 
   useEffect(() => {
     if (
@@ -115,22 +140,25 @@ const Payment: React.FC = () => {
         <section>
           <p className="mb-4">Endereço de entrega</p>
           <form className="grid grid-cols-2 gap-4">
-            <div className="col-span-1">
+            <div className="col-span-1 relative">
               <label htmlFor="cep" className=" uppercase text-xs">
-                CEP
+                CEP <span className="text-red-500 text-base">*</span>
               </label>
               <input
                 type="text"
-                className="p-2 w-full"
+                className="p-2 w-full pr-4"
                 id="cep"
                 value={formInputs.cep}
                 onChange={onChangeCep}
                 placeholder="00000-000"
               />
+              {loading && (
+                <span className="absolute right-3 bottom-[14px] border-2 border-blue-500 border-t-transparent w-4 h-4 rounded-full animate-spin"></span>
+              )}
             </div>
             <div className="col-span-1">
               <label htmlFor="district" className=" uppercase text-xs">
-                Bairro
+                Bairro <span className="text-red-500 text-base">*</span>
               </label>
               <input
                 type="text"
@@ -148,7 +176,7 @@ const Payment: React.FC = () => {
             </div>
             <div className="col-span-1">
               <label htmlFor="street" className=" uppercase text-xs">
-                Rua
+                Rua <span className="text-red-500 text-base">*</span>
               </label>
               <input
                 type="text"
@@ -163,7 +191,7 @@ const Payment: React.FC = () => {
             </div>
             <div className="col-span-1">
               <label htmlFor="number" className=" uppercase text-xs">
-                Número
+                Número <span className="text-red-500 text-base">*</span>
               </label>
               <input
                 type="text"
@@ -239,7 +267,7 @@ const Payment: React.FC = () => {
           </p>
         </div>
         <button disabled={!formIsFilled} className="button mt-4 w-full">
-          Concluir
+          Concluir pedido
         </button>
       </div>
     </section>

@@ -6,7 +6,8 @@ const SubHeaderTop: React.FC = () => {
     <div className=" bg-red-theme py-1 w-full text-xs text-white-beige">
       <div className="max-w-[980px] mx-auto  px-2 flex items-center justify-between">
         <span className="flex-1">
-          <FontAwesomeIcon icon={faTruck} className="mr-1" /> Delivery
+          <FontAwesomeIcon icon={faTruck} className="mr-1" /> Delivery -
+          Fortaleza/CE
         </span>
         <span className="flex-1 text-center">
           <FontAwesomeIcon icon={faClock} className="mr-1" />

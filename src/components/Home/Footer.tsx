@@ -5,7 +5,8 @@ const Footer: React.FC = () => {
   return (
     <footer className="flex items-center justify-between pl-20 text-base text-neutral-400">
       <span>
-        <FontAwesomeIcon icon={faTruck} className="mr-3" /> Delivery
+        <FontAwesomeIcon icon={faTruck} className="mr-3" /> Delivery -
+        Fortaleza/CE
       </span>
       <span>
         <FontAwesomeIcon icon={faPhone} className="mr-3" />
