@@ -104,13 +104,15 @@ const Payment: React.FC = () => {
       formInputs.district &&
       formInputs.number &&
       formInputs.street &&
-      paymentSelected
+      paymentSelected &&
+      !cepInvalid &&
+      formInputs.cep.length === 8
     ) {
       setFormIsFilled(true);
     } else {
       setFormIsFilled(false);
     }
-  }, [formInputs, paymentSelected]);
+  }, [formInputs, paymentSelected, cepInvalid]);
 
   return (
     <section className="flex gap-8 text-base items-start">
