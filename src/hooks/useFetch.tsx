@@ -11,6 +11,7 @@ interface dataCEP {
   logradouro: string;
   siafi: string;
   uf: string;
+  erro: boolean;
 }
 
 const useFetch = () => {

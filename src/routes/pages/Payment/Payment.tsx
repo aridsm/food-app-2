@@ -40,6 +40,7 @@ const Payment: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
 
   const { data, error, loading, request } = useFetch();
+  const [cepInvalid, setCepInvalid] = useState<boolean>(true); // menos do que 8 caracteres
   const [formIsFilled, setFormIsFilled] = useState<boolean>(false);
   const [paymentSelected, setPaymentSelected] = useState<Payments | null>(null);
   const [formInputs, setFormInputs] = useState<{
@@ -60,19 +61,31 @@ const Payment: React.FC = () => {
     return curr.quantity + acc;
   }, 0);
 
-  const onChangeCep = async ({
-    target,
-  }: {
-    target: EventTarget & HTMLInputElement;
-  }) => {
-    setFormInputs((state) => ({ ...state, cep: target.value }));
-    if (target.value.length === 8) {
-      await request(`https://viacep.com.br/ws/${target.value}/json/`);
+  const onChangeCep = async (e: any) => {
+    const numbers = /^\d+$/;
+
+    if (numbers.test(e.target.value) || e.target.value === "") {
+      setFormInputs((state) => ({ ...state, cep: e.target.value }));
+      if (e.target.value.length === 8) {
+        await request(`https://viacep.com.br/ws/${e.target.value}/json/`);
+      }
     }
   };
 
+  const invalidateCep = () => {
+    setCepInvalid(true);
+    setFormInputs((state) => {
+      return {
+        ...state,
+        district: "",
+        street: "",
+      };
+    });
+  };
+
   useEffect(() => {
-    if (data) {
+    if (data && !data.erro && data.uf === "CE") {
+      setCepInvalid(false);
       setFormInputs((state) => {
         return {
           ...state,
@@ -81,13 +94,7 @@ const Payment: React.FC = () => {
         };
       });
     } else {
-      setFormInputs((state) => {
-        return {
-          ...state,
-          district: "",
-          street: "",
-        };
-      });
+      invalidateCep();
     }
   }, [data]);
 
@@ -153,8 +160,14 @@ const Payment: React.FC = () => {
                 onChange={onChangeCep}
                 placeholder="00000-000"
               />
+              {(cepInvalid || formInputs.cep.trim().length !== 8) && (
+                <p className="text-xs mt-1 text-red-500">
+                  O valor do CEP não é válido
+                </p>
+              )}
+
               {loading && (
-                <span className="absolute right-3 bottom-[14px] border-2 border-blue-500 border-t-transparent w-4 h-4 rounded-full animate-spin"></span>
+                <span className="absolute right-3 top-[38px] border-2 border-blue-500 border-t-transparent w-4 h-4 rounded-full animate-spin"></span>
               )}
             </div>
             <div className="col-span-1">
