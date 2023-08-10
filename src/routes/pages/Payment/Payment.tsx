@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppSelector } from "../../../store/hooks";
 import convertToCurrency from "../../../utils/convertToCurrency";
 import useFetch from "../../../hooks/useFetch";
+import CardDataSection from "../../../components/Payment/CardDataSection";
 
 const payments: { name: string; id: Payments; icon: IconDefinition }[] = [
   {
@@ -226,7 +227,7 @@ const Payment: React.FC = () => {
         </section>
         <section>
           <p className="mb-4">Forma de pagamento</p>
-          <ul className="text-lg grid grid-cols-2 gap-4">
+          <ul className="text-lg grid grid-cols-2 gap-4 mb-4">
             {payments.map((payment) => (
               <li key={payment.id}>
                 <button
@@ -243,6 +244,8 @@ const Payment: React.FC = () => {
               </li>
             ))}
           </ul>
+          {(paymentSelected === Payments.CreditCard ||
+            paymentSelected === Payments.DebitCard) && <CardDataSection />}
         </section>
       </div>
       <div className="flex-1 bg-neutral-50 p-5 rounded-md ml-12 card">
