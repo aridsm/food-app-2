@@ -191,7 +191,9 @@ const Menu: React.FC = () => {
             <li
               key={item.id}
               className={
-                isMoving ? "pointer-events-none" : "pointer-events-auto"
+                isMoving
+                  ? "pointer-events-none select-none"
+                  : "pointer-events-auto select-auto"
               }
             >
               <button

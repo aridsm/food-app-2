@@ -27,6 +27,7 @@ const Content: React.FC = () => {
         <NavLink
           to="/menu"
           className={`button relative self-start ${classes.linkMenu}`}
+          style={{ padding: "1rem 2.25rem" }}
         >
           Ver cardápio
         </NavLink>
