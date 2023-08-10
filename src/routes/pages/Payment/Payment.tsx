@@ -57,6 +57,14 @@ const Payment: React.FC = () => {
     return curr.quantity + acc;
   }, 0);
 
+  const onChangeCep = ({
+    target,
+  }: {
+    target: EventTarget & HTMLInputElement;
+  }) => {
+    setFormInputs((state) => ({ ...state, cep: target.value }));
+  };
+
   useEffect(() => {
     if (
       formInputs.cep &&
@@ -116,9 +124,7 @@ const Payment: React.FC = () => {
                 className="p-2 w-full"
                 id="cep"
                 value={formInputs.cep}
-                onChange={({ target }) =>
-                  setFormInputs((state) => ({ ...state, cep: target.value }))
-                }
+                onChange={onChangeCep}
                 placeholder="00000-000"
               />
             </div>
