@@ -3,6 +3,8 @@ import Content from "../../../components/Home/Content";
 import Footer from "../../../components/Home/Footer";
 import imgHome from "../../../assets/imgs/home-img.jpg";
 import ArcSvg from "../../../assets/imgs/arc.tsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const Home: React.FC = () => {
   return (
@@ -18,8 +20,11 @@ const Home: React.FC = () => {
         <p className="text-white-beige px-12 z-20 relative">
           Praesent vitae pellentesque augue
         </p>
-        <span className="text-white-beige z-20 absolute bottom-8 left-8 text-base">
-          Feito por Ariane Morelato
+        <span className="text-white-beige z-20 absolute bottom-8 left-8 text-base flex">
+          Feito por
+          <a href="https://github.com/aridsm" target="_blank" className="ml-1">
+            Ariane Morelato <FontAwesomeIcon icon={faGithub} />
+          </a>
         </span>
 
         <ArcSvg className="absolute bottom-0 -right-[125px]" />
