@@ -8,6 +8,7 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { cartActions } from "../../../store/cartStore.store";
 import convertToCurrency from "../../../utils/convertToCurrency";
 import { useNavigate } from "react-router-dom";
+import ModalConfirm from "../../../components/General/ModalConfirm";
 
 const Cart: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
@@ -15,6 +16,15 @@ const Cart: React.FC = () => {
 
   const navigate = useNavigate();
   const [selectedItems, setSelectedItems] = useState<CartItem[]>([]);
+  const [modalAlert, setModalAlert] = useState<{
+    open: boolean;
+    message: string;
+    onConfirm: (() => void) | undefined;
+  }>({
+    open: false,
+    message: "",
+    onConfirm: undefined,
+  });
   const [currentTotal, setCurrentTotal] = useState<number>(0);
 
   useEffect(() => {
@@ -35,9 +45,29 @@ const Cart: React.FC = () => {
     }
   };
 
+  const onCloseModalAlert = () => {
+    setModalAlert((state) => {
+      return {
+        ...state,
+        open: false,
+      };
+    });
+  };
+
+  const onConfirmDeleteAllItems = () => {
+    setModalAlert(() => {
+      return {
+        open: true,
+        message: "Deseja realmente excluir todos os itens do carrinho?",
+        onConfirm: deleteAllItems,
+      };
+    });
+  };
+
   const deleteAllItems = () => {
     dispatch(cartActions.cleanCart());
     setSelectedItems([]);
+    onCloseModalAlert();
   };
 
   const recountTotal = () => {
@@ -62,6 +92,12 @@ const Cart: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full w-full">
+      <ModalConfirm
+        close={onCloseModalAlert}
+        message={modalAlert.message}
+        open={modalAlert.open}
+        onConfirm={modalAlert.onConfirm}
+      />
       <div>
         <div className="flex items-center">
           <CheckBox
@@ -108,8 +144,9 @@ const Cart: React.FC = () => {
           <p>Total</p>
           <span className="text-3xl">{convertToCurrency(currentTotal)}</span>
           <button
-            className="text-red-theme flex gap-2 items-center mt-4 text-base"
-            onClick={deleteAllItems}
+            disabled={cart.cartItems.length === 0}
+            className="text-red-theme disabled:opacity-50 disabled:cursor-not-allowed flex gap-2 items-center mt-4 text-base"
+            onClick={onConfirmDeleteAllItems}
           >
             Esvaziar carrinho
             <FontAwesomeIcon icon={faTrashCan} />
