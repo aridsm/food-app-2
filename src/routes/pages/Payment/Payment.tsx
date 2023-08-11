@@ -12,6 +12,9 @@ import { useAppSelector } from "../../../store/hooks";
 import convertToCurrency from "../../../utils/convertToCurrency";
 import useFetch from "../../../hooks/useFetch";
 import CardDataSection from "../../../components/Payment/CardDataSection";
+import ModalConfirm from "../../../components/General/ModalConfirm";
+import ColorsAlerts from "../../../types/enums/colorsAlert";
+import { useNavigate } from "react-router-dom";
 
 const payments: { name: string; id: Payments; icon: IconDefinition }[] = [
   {
@@ -38,9 +41,11 @@ const payments: { name: string; id: Payments; icon: IconDefinition }[] = [
 
 const Payment: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
+  const navigate = useNavigate();
 
   const { data, loading, request } = useFetch();
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [modalAlertOpen, setModalAlertOpen] = useState<boolean>(false);
   const [cepInvalid, setCepInvalid] = useState<boolean>(true); // menos do que 8 caracteres
   const [formIsFilled, setFormIsFilled] = useState<boolean>(false);
   const [paymentSelected, setPaymentSelected] = useState<Payments | null>(null);
@@ -81,6 +86,15 @@ const Payment: React.FC = () => {
     if (numbers.test(target.value)) {
       setFormInputs((state) => ({ ...state, number: target.value }));
     }
+  };
+
+  const finalizeOrder = () => {
+    setModalAlertOpen(true);
+  };
+
+  const onCloseModalAlert = () => {
+    setModalAlertOpen(false);
+    navigate({ pathname: "/menu" });
   };
 
   const invalidateCep = () => {
@@ -133,6 +147,13 @@ const Payment: React.FC = () => {
 
   return (
     <section className="flex gap-8 text-base items-start">
+      <ModalConfirm
+        close={onCloseModalAlert}
+        message="O pedido foi finalizado! Aguarde enquanto preparamos o seu pedido"
+        open={modalAlertOpen}
+        onConfirm={onCloseModalAlert}
+        status={ColorsAlerts.Success}
+      />
       <div className="flex flex-col gap-12 basis-[50%]">
         <section>
           <div className="mb-2 flex gap-2 items-center">
@@ -299,7 +320,11 @@ const Payment: React.FC = () => {
               : ""}
           </p>
         </div>
-        <button disabled={!formIsFilled} className="button mt-4 w-full">
+        <button
+          disabled={!formIsFilled}
+          className="button mt-4 w-full"
+          onClick={finalizeOrder}
+        >
           Concluir pedido
         </button>
       </div>

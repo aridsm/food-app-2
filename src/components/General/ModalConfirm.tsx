@@ -1,20 +1,40 @@
-import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import {
+  IconDefinition,
+  faCircleCheck,
+  faCircleXmark,
+  faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactDOM from "react-dom";
+import ColorsAlerts from "../../types/enums/colorsAlert";
+import { useEffect, useState } from "react";
 
 const modalElement = document.getElementById("modalConfirm")! as HTMLElement;
 
 const ModalContent: React.FC<{
   onClose: () => void;
   onConfirm: (() => void) | undefined;
+  status?: ColorsAlerts;
   open: boolean;
   message: string;
-}> = ({ onClose, open, onConfirm, message }) => {
+}> = ({ onClose, open, onConfirm, message, status }) => {
+  const [currentIcon, setCurrentIcon] = useState<IconDefinition>(faCircleCheck);
+
   const closeModalHandler = (event: React.MouseEvent) => {
     if (event.target === event.currentTarget) {
       onClose();
     }
   };
+
+  useEffect(() => {
+    if (status === ColorsAlerts.Alert) {
+      setCurrentIcon(faTriangleExclamation);
+    } else if (status === ColorsAlerts.Danger) {
+      setCurrentIcon(faCircleXmark);
+    } else {
+      setCurrentIcon(faCircleCheck);
+    }
+  }, [status]);
 
   return (
     <div
@@ -31,9 +51,16 @@ const ModalContent: React.FC<{
         }`}
       >
         <FontAwesomeIcon
-          icon={faTriangleExclamation}
-          className=" text-mostard text-3xl mb-4"
+          icon={currentIcon}
+          className={`text-3xl mb-4 ${
+            status === ColorsAlerts.Success
+              ? "text-emerald-400"
+              : status === ColorsAlerts.Danger
+              ? "text-red-theme"
+              : "text-amber-400"
+          }`}
         />
+
         <p className="text-center">{message}</p>
 
         {onConfirm && (
@@ -49,15 +76,17 @@ const ModalContent: React.FC<{
 const ModalConfirm: React.FC<{
   close: () => void;
   onConfirm: (() => void) | undefined;
+  status?: ColorsAlerts;
   open: boolean;
   message: string;
-}> = ({ close, onConfirm, open, message }) => {
+}> = ({ close, onConfirm, open, message, status = ColorsAlerts.Alert }) => {
   return ReactDOM.createPortal(
     <ModalContent
       onClose={close}
       onConfirm={onConfirm}
       open={open}
       message={message}
+      status={status}
     />,
     modalElement
   );

@@ -15,6 +15,7 @@ const initialState = {
     open: false,
     message: "",
     color: undefined,
+    status: ColorsAlerts.Alert,
   } as ModalAlert,
 };
 
@@ -31,7 +32,10 @@ const modalSlice = createSlice({
     },
     openModalAlert(
       state,
-      data: PayloadAction<{ message: string; color: ColorsAlerts }>
+      data: PayloadAction<{
+        message: string;
+        color: ColorsAlerts;
+      }>
     ) {
       state.modalAlert.open = true;
       state.modalAlert.message = data.payload.message;
