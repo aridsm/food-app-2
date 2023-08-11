@@ -70,7 +70,7 @@ const SearchBar: React.FC = () => {
         className={` px-2 py-1 text-sm transition-all ${
           searchBarVisible ? "w-40 opacity-100" : "w-0 opacity-0"
         }`}
-        placeholder="Digite..."
+        placeholder="Pesquisar..."
         type="text"
         value={searchValue}
         onChange={({ target }) => setSearchValue(target.value)}

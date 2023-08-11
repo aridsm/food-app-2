@@ -107,6 +107,10 @@ const Cart: React.FC = () => {
                 ? cart.cartItems.length === selectedItems.length
                 : false
             }
+            semiSelected={
+              selectedItems.length > 0 &&
+              cart.cartItems.length !== selectedItems.length
+            }
           />
           <p>Seu carrinho</p>
 
