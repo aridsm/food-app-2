@@ -40,6 +40,7 @@ const Payment: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
 
   const { data, error, loading, request } = useFetch();
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [cepInvalid, setCepInvalid] = useState<boolean>(true); // menos do que 8 caracteres
   const [formIsFilled, setFormIsFilled] = useState<boolean>(false);
   const [paymentSelected, setPaymentSelected] = useState<Payments | null>(null);
@@ -61,19 +62,30 @@ const Payment: React.FC = () => {
     return curr.quantity + acc;
   }, 0);
 
-  const onChangeCep = async (e: any) => {
+  const onChangeCep = async ({ target }: { target: HTMLInputElement }) => {
+    setErrorMessage("");
+
     const numbers = /^\d+$/;
 
-    if (numbers.test(e.target.value) || e.target.value === "") {
-      setFormInputs((state) => ({ ...state, cep: e.target.value }));
-      if (e.target.value.length === 8) {
-        await request(`https://viacep.com.br/ws/${e.target.value}/json/`);
+    if (numbers.test(target.value) || target.value === "") {
+      setFormInputs((state) => ({ ...state, cep: target.value }));
+      if (target.value.length === 8) {
+        await request(`https://viacep.com.br/ws/${target.value}/json/`);
       }
+    }
+  };
+
+  const onChangeNumber = async ({ target }: { target: HTMLInputElement }) => {
+    const numbers = /^\d+$/;
+
+    if (numbers.test(target.value)) {
+      setFormInputs((state) => ({ ...state, number: target.value }));
     }
   };
 
   const invalidateCep = () => {
     setCepInvalid(true);
+    setErrorMessage("");
     setFormInputs((state) => {
       return {
         ...state,
@@ -84,15 +96,20 @@ const Payment: React.FC = () => {
   };
 
   useEffect(() => {
-    if (data && !data.erro && data.uf === "CE") {
-      setCepInvalid(false);
-      setFormInputs((state) => {
-        return {
-          ...state,
-          district: data.bairro,
-          street: data.logradouro,
-        };
-      });
+    if (data && !data.erro) {
+      if (data.uf === "CE" && data.localidade === "Fortaleza") {
+        setCepInvalid(false);
+        setFormInputs((state) => {
+          return {
+            ...state,
+            district: data.bairro,
+            street: data.logradouro,
+          };
+        });
+        setErrorMessage("");
+      } else {
+        setErrorMessage("O CEP não pertence a cidade de Fortaleza(CE)");
+      }
     } else {
       invalidateCep();
     }
@@ -164,7 +181,7 @@ const Payment: React.FC = () => {
               />
               {(cepInvalid || formInputs.cep.trim().length !== 8) && (
                 <p className="text-xs mt-1 text-red-500">
-                  O valor do CEP não é válido
+                  {errorMessage ? errorMessage : "O valor do CEP não é válido"}
                 </p>
               )}
 
@@ -214,9 +231,7 @@ const Payment: React.FC = () => {
                 className="p-2 w-full"
                 id="number"
                 value={formInputs.number}
-                onChange={({ target }) =>
-                  setFormInputs((state) => ({ ...state, number: target.value }))
-                }
+                onChange={onChangeNumber}
                 placeholder="000"
               />
             </div>
