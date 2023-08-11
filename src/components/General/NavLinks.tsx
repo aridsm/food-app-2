@@ -11,7 +11,7 @@ const NavLinks: React.FC<{ className?: string }> = ({ className }) => {
         <li>
           <NavLink
             to="/"
-            className={`px-2 border-b-[3px] ${
+            className={`border-b-[3px] ${
               currentPath === "/" ? classes.activeLink : "border-transparent"
             }`}
           >
@@ -21,7 +21,7 @@ const NavLinks: React.FC<{ className?: string }> = ({ className }) => {
         <li>
           <NavLink
             to="/menu"
-            className={`px-2 border-b-[3px] ${
+            className={`px-1 border-b-[3px] ${
               currentPath === "/menu"
                 ? classes.activeLink
                 : "border-transparent"

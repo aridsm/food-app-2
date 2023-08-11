@@ -145,21 +145,14 @@ const Results: React.FC<{
           {search.search.length > 0 && (
             <Chip title={search.search} action={onCleanSearch} />
           )}
-          {priceRange.min && priceRange.max && (
-            <Chip
-              title={`${convertToCurrency(
-                priceRange.min
-              )} - ${convertToCurrency(priceRange.max)}`}
-              action={cleanPriceRange}
-            />
-          )}
-          {priceRange.min && !priceRange.max && (
+
+          {priceRange.min && (
             <Chip
               title={`mínimo: ${convertToCurrency(priceRange.min)}`}
               action={cleanPriceRange}
             />
           )}
-          {!priceRange.min && priceRange.max && (
+          {priceRange.max && (
             <Chip
               title={`máximo: ${convertToCurrency(priceRange.max)}`}
               action={cleanPriceRange}

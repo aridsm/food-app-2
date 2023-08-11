@@ -5,7 +5,7 @@ import {
   IconDefinition,
   faCreditCard,
   faCreditCardAlt,
-  faMoneyBillTrendUp,
+  faMoneyBill,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppSelector } from "../../../store/hooks";
@@ -32,14 +32,14 @@ const payments: { name: string; id: Payments; icon: IconDefinition }[] = [
   {
     name: "Dinheiro",
     id: Payments.Cash,
-    icon: faMoneyBillTrendUp,
+    icon: faMoneyBill,
   },
 ];
 
 const Payment: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
 
-  const { data, error, loading, request } = useFetch();
+  const { data, loading, request } = useFetch();
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [cepInvalid, setCepInvalid] = useState<boolean>(true); // menos do que 8 caracteres
   const [formIsFilled, setFormIsFilled] = useState<boolean>(false);
