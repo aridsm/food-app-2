@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const SubHeaderTop: React.FC = () => {
   return (
     <div className=" bg-red-theme py-1 w-full text-xs text-white-beige">
-      <div className="max-w-[980px] mx-auto  px-2 flex items-center justify-between">
+      <div className="max-w-[980px] mx-auto px-2 flex items-center justify-between">
         <span className="flex-1">
           <FontAwesomeIcon icon={faTruck} className="mr-1" /> Delivery -
           Fortaleza/CE

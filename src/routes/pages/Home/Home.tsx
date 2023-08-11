@@ -21,10 +21,12 @@ const Home: React.FC = () => {
         <span className="text-white-beige z-20 absolute bottom-8 left-8 text-base">
           Feito por Ariane Morelato
         </span>
+
         <ArcSvg className="absolute bottom-0 -right-[125px]" />
         <ArcSvg className="absolute bottom-32 left-0 rotate-180" />
       </div>
       <div className="w-full">
+        <ArcSvg className="absolute top-0 -right-[125px] rotate-180 -z-10" />
         <div className="w-[840px] mx-auto px-2 py-8 min-h-screen flex flex-col">
           <Header />
           <Content />
