@@ -8,13 +8,14 @@ import {
   faMoneyBill,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import convertToCurrency from "../../../utils/convertToCurrency";
 import useFetch from "../../../hooks/useFetch";
 import CardDataSection from "../../../components/Payment/CardDataSection";
 import ModalConfirm from "../../../components/General/ModalConfirm";
 import ColorsAlerts from "../../../types/enums/colorsAlert";
 import { useNavigate } from "react-router-dom";
+import { cartActions } from "../../../store/cartStore.store";
 
 const payments: { name: string; id: Payments; icon: IconDefinition }[] = [
   {
@@ -42,6 +43,7 @@ const payments: { name: string; id: Payments; icon: IconDefinition }[] = [
 const Payment: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const { data, loading, request } = useFetch();
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -94,6 +96,7 @@ const Payment: React.FC = () => {
 
   const onCloseModalAlert = () => {
     setModalAlertOpen(false);
+    dispatch(cartActions.cleanCart());
     navigate({ pathname: "/menu" });
   };
 
