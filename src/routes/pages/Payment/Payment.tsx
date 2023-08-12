@@ -85,7 +85,7 @@ const Payment: React.FC = () => {
   const onChangeNumber = async ({ target }: { target: HTMLInputElement }) => {
     const numbers = /^\d+$/;
 
-    if (numbers.test(target.value)) {
+    if (numbers.test(target.value) || target.value === "") {
       setFormInputs((state) => ({ ...state, number: target.value }));
     }
   };
@@ -306,34 +306,55 @@ const Payment: React.FC = () => {
             paymentSelected === Payments.DebitCard) && <CardDataSection />}
         </section>
       </div>
-      <div className="flex-1 bg-neutral-50 p-5 rounded-md ml-12 card">
-        <div className="flex justify-between items-center text-xl mb-6">
-          <p>Total</p>
-          <p>{convertToCurrency(cart.totalPriceSelectedItems)}</p>
+      <div className="flex-1 ml-12">
+        <div className=" bg-neutral-50 p-5 rounded-md card">
+          <div className="flex justify-between items-center text-xl mb-6">
+            <p>Total</p>
+            <p>{convertToCurrency(cart.totalPriceSelectedItems)}</p>
+          </div>
+          <div className="flex justify-between items-center mb-4">
+            <p>Desconto</p>
+            <p className="text-neutral-400">R$ 0,00</p>
+          </div>
+          <div className="flex justify-between items-center mb-4">
+            <p>Itens</p>
+            <p className="text-neutral-400">10</p>
+          </div>
+          <div className="flex justify-between items-center">
+            <p>Forma de pagamento</p>
+            <p className="text-neutral-400">
+              {paymentSelected
+                ? payments.find((p) => p.id === paymentSelected)!.name
+                : ""}
+            </p>
+          </div>
+          <button
+            disabled={!formIsFilled}
+            className="button mt-4 w-full"
+            onClick={finalizeOrder}
+          >
+            Concluir pedido
+          </button>
         </div>
-        <div className="flex justify-between items-center mb-4">
-          <p>Desconto</p>
-          <p className="text-neutral-400">R$ 0,00</p>
-        </div>
-        <div className="flex justify-between items-center mb-4">
-          <p>Itens</p>
-          <p className="text-neutral-400">10</p>
-        </div>
-        <div className="flex justify-between items-center">
-          <p>Forma de pagamento</p>
-          <p className="text-neutral-400">
-            {paymentSelected
-              ? payments.find((p) => p.id === paymentSelected)!.name
-              : ""}
-          </p>
-        </div>
-        <button
-          disabled={!formIsFilled}
-          className="button mt-4 w-full"
-          onClick={finalizeOrder}
-        >
-          Concluir pedido
-        </button>
+        {formInputs.street &&
+          formInputs.district &&
+          formInputs.number &&
+          formInputs.cep && (
+            <div className="mt-6 bg-neutral-50 p-5 rounded-md card">
+              <p className="mb-2 border-b-2 border-neutral-200 pb-2">
+                Confirme seu endereço
+              </p>
+              <address className="not-italic">
+                <p>
+                  {formInputs.street}, nº {formInputs.number}{" "}
+                  {formInputs.complement ? `- ${formInputs.complement}` : ""}
+                </p>
+                <p>Bairro {formInputs.district}</p>
+                <p>Fortaleza - Ceará</p>
+                <p>CEP: {formInputs.cep}</p>
+              </address>
+            </div>
+          )}
       </div>
     </section>
   );
