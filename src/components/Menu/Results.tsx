@@ -57,7 +57,11 @@ const Results: React.FC<{
 
     if (priceRange.min || priceRange.max) {
       itemsFiltered = itemsFiltered.filter((item: MenuItem) => {
-        if (priceRange.min && priceRange.max) {
+        if (
+          priceRange.min &&
+          priceRange.max &&
+          priceRange.min <= priceRange.max
+        ) {
           if (item.price >= priceRange.min && item.price <= priceRange.max) {
             return item;
           }
@@ -69,6 +73,8 @@ const Results: React.FC<{
           if (item.price <= priceRange.max) {
             return item;
           }
+        } else {
+          return item;
         }
       });
     }
