@@ -1,5 +1,4 @@
 import Content from "./routes/Content";
-import ArcSvg from "./assets/imgs/arc.tsx";
 import Modal from "./components/General/Modal.tsx";
 import { useAppDispatch, useAppSelector } from "./store/hooks.tsx";
 import { modalActions } from "./store/modalStore.store.tsx";

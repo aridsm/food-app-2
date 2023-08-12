@@ -96,7 +96,11 @@ const Payment: React.FC = () => {
 
   const onCloseModalAlert = () => {
     setModalAlertOpen(false);
-    dispatch(cartActions.cleanCart());
+
+    cart.selectedItems.forEach((selItem) => {
+      dispatch(cartActions.deleteItemFromCart(selItem.id));
+    });
+    dispatch(cartActions.setSelectedItems({ items: [], price: 0 }));
     navigate({ pathname: "/menu" });
   };
 

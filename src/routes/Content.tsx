@@ -4,8 +4,12 @@ import Menu from "./pages/Menu/Menu";
 import Layout from "../components/General/Layout";
 import Cart from "./pages/Cart/Cart";
 import Payment from "./pages/Payment/Payment";
+import NotFound from "./pages/NotFound/404";
+import { useAppSelector } from "../store/hooks";
 
 const Content: React.FC = () => {
+  const cart = useAppSelector((state) => state.cart);
+
   return (
     <div>
       <Routes>
@@ -19,7 +23,10 @@ const Content: React.FC = () => {
         >
           <Route path="/menu" element={<Menu />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/payment" element={<Payment />} />
+          {cart.selectedItems.length && (
+            <Route path="/payment" element={<Payment />} />
+          )}
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </div>
