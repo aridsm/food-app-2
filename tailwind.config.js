@@ -9,6 +9,10 @@ export default {
         ["white-beige"]: "#F7F6F3",
         ["mostard"]: "#E5D54A",
       },
+      screens: {
+        xl: "1200px",
+        // => @media (min-width: 640px) { ... }
+      },
     },
   },
   plugins: [],

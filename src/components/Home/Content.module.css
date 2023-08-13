@@ -8,7 +8,7 @@
 }
 
 .imgsOptions img {
-  @apply w-16 h-16 rounded-full border-[5px] border-white-beige;
+  @apply w-12 h-12 xl:w-16 xl:h-16 rounded-full border-[5px] border-white-beige;
 }
 
 .imgsOptions img + img {

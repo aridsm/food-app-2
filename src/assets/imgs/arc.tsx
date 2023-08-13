@@ -1,12 +1,10 @@
 export const ArcSvg = ({ className }: { className?: string }) => {
   return (
     <svg
-      width="250"
-      height="120"
-      viewBox="0 0 282 141"
+      viewBox="0 0 283 141"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
+      className={`w-40 xl:w-56 xl:h-auto ${className}`}
     >
       <path
         fillRule="evenodd"

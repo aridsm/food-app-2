@@ -1,9 +1,11 @@
 import { faClock, faPhone, faTruck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const SubHeaderTop: React.FC = () => {
+const SubHeaderTop: React.FC<{ className?: string }> = ({ className }) => {
   return (
-    <div className=" bg-red-theme py-1 w-full text-xs text-white-beige">
+    <div
+      className={`${className} bg-red-theme py-1 w-full text-xs text-white-beige`}
+    >
       <div className="max-w-[980px] mx-auto px-2 flex items-center justify-between">
         <span className="flex-1">
           <FontAwesomeIcon icon={faTruck} className="mr-1" /> Delivery -

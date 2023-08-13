@@ -14,7 +14,7 @@ import img3 from "../../assets/imgs/home3.jpg";
 
 const Content: React.FC = () => {
   return (
-    <main className="flex-1 flex flex-col justify-center py-8">
+    <main className="flex-1 flex flex-col justify-center py-8 px-2 mx-auto xl:mx-0 max-w-[650px] xl:max-w-none">
       <p className=" bg-red-theme/[.05] text-red-theme rounded-sm py-2 px-4 mb-4 flex items-center w-fit">
         <FontAwesomeIcon icon={faClock} className="mr-3" />
         <time>17:00</time>h - <time>23:00</time>h
@@ -26,8 +26,7 @@ const Content: React.FC = () => {
       <div className="mt-10 flex gap-16">
         <NavLink
           to="/menu"
-          className={`button relative self-start ${classes.linkMenu}`}
-          style={{ padding: "1rem 2.25rem" }}
+          className={`bg-red-theme py-3 px-6 xl:py-4 xl:px-9 rounded-sm text-white-beige hover:bg-red-hover relative self-start ${classes.linkMenu}`}
         >
           Ver cardápio
         </NavLink>
