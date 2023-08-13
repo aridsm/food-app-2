@@ -9,7 +9,7 @@ const CartNavLink: React.FC = () => {
   return (
     <NavLink to="/cart" className="flex items-center gap-2" title="Carrinho">
       <FontAwesomeIcon icon={faCartShopping} />
-      <div className="bg-neutral-200/[.5] text-neutral-500 text-base rounded-sm px-2">
+      <div className="bg-neutral-200/[.3]  text-base rounded-sm px-2">
         {cart.totalItems}
       </div>
     </NavLink>
