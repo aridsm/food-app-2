@@ -19,7 +19,7 @@ const Home: React.FC = () => {
             src={imgHome}
             className="w-full h-full absolute top-0 left-0 object-cover mix-blend-luminosity opacity-[.15]"
           />
-          <p className="z-20 relative text-white-beige text-[2.8rem] p-12 pb-4 leading-[160%] font-bold">
+          <p className="z-20 relative text-white-beige text-[2.8rem] 2xl:text-[3.2rem] p-12 pb-4 leading-[160%] font-bold">
             Nunc hendrerit magna sit amet justo
           </p>
           <p className="text-white-beige px-12 z-20 relative">

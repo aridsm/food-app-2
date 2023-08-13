@@ -10,7 +10,7 @@ export default {
         ["mostard"]: "#E5D54A",
       },
       screens: {
-        xl: "1200px",
+        "2xl": "1640px",
         // => @media (min-width: 640px) { ... }
       },
     },

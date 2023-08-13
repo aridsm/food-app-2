@@ -19,8 +19,8 @@ const Content: React.FC = () => {
         <FontAwesomeIcon icon={faClock} className="mr-3" />
         <time>17:00</time>h - <time>23:00</time>h
       </p>
-      <h2 className="text-[40px] leading-[130%] relative max-w-[600px]">
-        <ArrowSvg className="absolute right-0 bottom-full  text-mostard" />
+      <h2 className="text-[40px] 2xl:text-[48px] leading-[130%] relative max-w-[600px] 2xl:max-w-[740px]">
+        <ArrowSvg className="absolute right-0 bottom-full text-mostard" />
         Orci varius natoque penatibus et magnis dis parturient montes
       </h2>
       <div className="mt-10 flex gap-16">

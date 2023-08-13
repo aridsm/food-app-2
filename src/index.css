@@ -13,7 +13,7 @@
 body {
   font-weight: 500;
   font-family: "Lexend Deca", sans-serif;
-  @apply text-neutral-600 text-base xl:text-lg bg-white-beige min-h-screen;
+  @apply text-neutral-600 text-sm md:text-base xl:text-lg 2xl:text-xl bg-white-beige min-h-screen;
 }
 
 button,

@@ -4,7 +4,7 @@ export const ArcSvg = ({ className }: { className?: string }) => {
       viewBox="0 0 283 141"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`w-40 xl:w-56 xl:h-auto ${className}`}
+      className={`w-32 lg:w-36 xl:w-56 2xl:w-[280px] h-auto  ${className}`}
     >
       <path
         fillRule="evenodd"
