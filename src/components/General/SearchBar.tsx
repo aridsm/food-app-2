@@ -16,8 +16,10 @@ const SearchBar: React.FC = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    if (searchBarVisible) {
+    if (searchBarVisible && searchValue) {
       searchProduct();
+    } else if (searchBarVisible && !searchValue) {
+      setSearchBarVisible(false);
     } else {
       setSearchBarVisible(true);
     }
@@ -65,9 +67,9 @@ const SearchBar: React.FC = () => {
   }, [dispatch, searchValue]);
 
   return (
-    <div ref={searchRef} className="flex items-center gap-4">
+    <div ref={searchRef} className="flex items-center gap-4 relative">
       <input
-        className={` px-2 py-1 text-sm transition-all ${
+        className={` px-2 py-1 text-sm absolute right-8 transition-all ${
           searchBarVisible ? "w-40 opacity-100" : "w-0 opacity-0"
         }`}
         placeholder="Pesquisar..."

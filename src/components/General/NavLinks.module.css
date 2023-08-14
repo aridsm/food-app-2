@@ -1,3 +1,9 @@
 .activeLink {
   @apply border-red-theme text-red-theme;
 }
+
+@media all and (max-width: 1280px) {
+  .activeLink {
+    @apply border-transparent text-white-beige;
+  }
+}
