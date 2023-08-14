@@ -11,7 +11,7 @@ import HomeMobile from "./HomeMobile.tsx";
 
 const Home: React.FC = () => {
   return (
-    <>
+    <div className="w-full">
       <div className="hidden xl:flex flex-col xl:flex-row h-full w-full">
         <SubHeaderTop className="block xl:hidden" />
         <div className={`hidden xl:block bg-red-theme w-[47%] relative`}>
@@ -50,8 +50,8 @@ const Home: React.FC = () => {
         </div>
         <ArcSvg className="xl:hidden absolute -left-[40px] bottom-[15%]  rotate-90 -z-10" />
       </div>
-      <HomeMobile className="flex xl:hidden" />
-    </>
+      <HomeMobile className="flex xl:hidden w-full" />
+    </div>
   );
 };
 

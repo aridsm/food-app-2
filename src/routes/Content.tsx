@@ -11,7 +11,7 @@ const Content: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
 
   return (
-    <div>
+    <div className="w-full">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

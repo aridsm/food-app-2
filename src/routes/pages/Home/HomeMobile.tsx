@@ -22,9 +22,9 @@ import {
 
 const HomeMobile: React.FC<{ className?: string }> = ({ className }) => {
   return (
-    <div className={`${className} flex flex-col h-full w-full pt-2`}>
+    <div className={`${className} flex flex-col h-full w-screen pt-2`}>
       <div
-        className={`${classes.container} px-2 overflow-hidden relative rounded-t-lg rounded-b-[3rem] text-white-beige flex flex-col items-center mx-2`}
+        className={`${classes.container} flex-1 px-2 overflow-hidden relative rounded-t-lg rounded-b-[3rem] text-white-beige flex flex-col items-center mx-2`}
       >
         <ArrowSvg className="absolute w-16 h-10 md:w-24 md:h-16 lg:w-32 lg:h-28 right-0 md:right-16 bottom-1/4 md:bottom-1/3 text-mostard rotate-90" />
         <div className="flex gap-2 sm:gap-4 items-end rotate-[35deg] absolute -bottom-6 left-0">
@@ -32,25 +32,29 @@ const HomeMobile: React.FC<{ className?: string }> = ({ className }) => {
           <div className="w-4 h-20 sm:w-8 sm:h-28 bg-mostard rounded-sm"></div>
         </div>
         <Header className=" text-white-beige py-6 max-w-[900px] w-full" />
-        <div className="w-fit text-center md:text-left max-w-[450px] md:max-w-[550px] lg:max-w-[750px] pt-6 lg:pt-10 pb-14 md:pb-20 lg:pb-24 self-center relative">
+        <div className="w-fit flex flex-col text-center md:text-left max-w-[450px] md:max-w-[550px] lg:max-w-[750px] pt-6 lg:pt-10 pb-14 md:pb-20 lg:pb-24 self-center relative">
           <p className=" bg-white-beige/[.05] text-white-beige justify-center w-fit mx-auto md:mx-0 rounded-sm py-2 px-4 mb-4 flex items-center ">
             <FontAwesomeIcon icon={faClock} className="mr-3" />
             <time>17:00</time>h - <time>23:00</time>h
           </p>
-          <h2 className=" text-[1.4rem] sm:text-[1.875rem] md:text-[2.25rem] lg:text-[3rem] leading-[130%] relative">
+          <h2 className=" px-6 md:px-0 text-[1.4rem] sm:text-[1.875rem] md:text-[2.25rem] lg:text-[3rem] leading-[130%] relative">
             Orci varius natoque penatibus et magnis dis parturient montes
           </h2>
-          <div className="mt-10 md:mt-16 lg:mt-20 gap-10 md:gap-16 items-center flex flex-col md:flex-row">
+          <div className="mt-10 md:mt-16 lg:mt-20 gap-10 md:gap-16 items-center flex flex-col md:flex-row w-full">
             <NavLink
               to="/menu"
               className={`py-2 px-5 sm:py-3 sm:px-7 lg:py-4 lg:px-9 mx-auto md:mx-0 rounded-sm text-white-beige hover:bg-red-hover border-[3px] border-white-beige relative self-start`}
             >
               Ver cardápio
             </NavLink>
-            <div className={`flex items-center ${classes.imgsOptions}`}>
-              <img src={img1} />
-              <img src={img2} />
-              <img src={img3} />
+            <div
+              className={`flex flex-col gap-8 md:flex-row items-center ${classes.imgsOptions}`}
+            >
+              <div className="flex items-center md:ml-6">
+                <img src={img1} />
+                <img src={img2} />
+                <img src={img3} />
+              </div>
               <p>+60 opções</p>
             </div>
           </div>
