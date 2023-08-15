@@ -42,26 +42,26 @@ const ModalContent: React.FC<{
       onClick={closeModalHandler}
     >
       <section
-        className={`flex flex-col relative bg-white-beige rounded-lg p-5 transition-all w-[370px] ${
+        className={`flex flex-col relative bg-white-beige rounded-lg p-3 md:p-5 transition-all max-w-[320px] md:max-w-[370px] ${
           open ? "top-0" : "-top-5 "
         }`}
       >
-        <div className="h-64 w-full rounded-md overflow-hidden mb-3">
+        <div className="h-60 md:h-64 w-full rounded-md overflow-hidden mb-3">
           <img
             src={`/src/assets/imgs/imgs-menu/${item?.imgPath}`}
             alt={item?.name}
             className="w-full h-full object-cover object-center"
           />
         </div>
-        <p className="text-center mb-2">{item?.name}</p>
-        <p className="text-neutral-400 mb-5 w-full text-base">
+        <p className="text-center mb-2 text-sm md:text-base">{item?.name}</p>
+        <p className="text-neutral-400 mb-5 w-full md:text-base">
           {item?.description}
         </p>
-        <div className="flex justify-between text-base items-center">
+        <div className="flex justify-between md:text-base items-center">
           <p>Valor unitário</p>
           {item.price && <p>{convertToCurrency(item.price)}</p>}
         </div>
-        <div className="mt-4 flex flex-col text-base">
+        <div className="mt-4 flex flex-col md:text-base">
           <div className="flex mb-2 ml-auto">
             <p className="text-neutral-400">Subtotal:</p>
             <span className="ml-2 text-red-theme">
@@ -72,7 +72,7 @@ const ModalContent: React.FC<{
             <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
             <button
               className="button p-0"
-              style={{ padding: "0.4rem 1rem" }}
+              style={{ padding: "0.5rem 1rem" }}
               onClick={addItem}
             >
               Adicionar ao carrinho

@@ -48,8 +48,8 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
           }`}
         />
       </div>
-      <NavLink to="/" className=" flex-1 text-center">
-        <h1 className="text-xl font-bold">LOGO</h1>
+      <NavLink to="/" className="flex-1 text-center">
+        <h1 className="text-lg sm:text-xl font-bold">LOGO</h1>
       </NavLink>
 
       <div className="flex-1 flex items-center gap-6 justify-end">

@@ -46,7 +46,7 @@ const ModalContent: React.FC<{
       onClick={closeModalHandler}
     >
       <section
-        className={`flex flex-col relative bg-white-beige rounded-lg p-5 transition-all w-[370px] ${
+        className={`flex flex-col relative bg-white-beige rounded-lg p-3 md:p-5 transition-all max-w-[280px] md:max-w-[370px] ${
           open ? "top-0" : "-top-5 "
         }`}
       >

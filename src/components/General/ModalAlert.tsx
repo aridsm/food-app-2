@@ -34,7 +34,7 @@ const ModalContent: React.FC<{
   useEffect(() => {
     refTimer.current = setTimeout(() => {
       onClose();
-    }, 2000);
+    }, 1500);
     return () => clearTimeout(refTimer.current);
   }, [onClose]);
 
@@ -45,7 +45,7 @@ const ModalContent: React.FC<{
       }`}
     >
       <div
-        className={`flex items-center text-base gap-2 bg-white-beige rounded-md p-3 w-80 mr-auto ${classes.alertContainer}`}
+        className={`flex items-center md:text-base gap-2 bg-white-beige rounded-md w-60 p-3 md:w-80 mr-auto ${classes.alertContainer}`}
       >
         <p>{message}</p>
         <FontAwesomeIcon
