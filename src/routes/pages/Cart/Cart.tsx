@@ -112,18 +112,16 @@ const Cart: React.FC = () => {
               cart.cartItems.length !== selectedItems.length
             }
           />
-          <p>Seu carrinho</p>
+          <div className="flex items-center gap-1 sm:gap-4 flex-col sm:flex-row">
+            <p>Seu carrinho ({cart.cartItems.length})</p>
 
-          <div className="flex text-neutral-400 ml-6 text-base leading-none">
-            <span>{cart.cartItems.length} item(ns)</span>
-            <span className="ml-4 border-l-2 border-l-neutral-400 pl-4">
+            <span className=" text-neutral-400 md:text-base leading-none">
               {selectedItems.length} selecionado(s)
             </span>
           </div>
-
-          <div className="items-center flex text-base ml-auto">
-            <p className="w-48 text-center">Quantidade</p>
-            <p className="w-48 text-end">Preço</p>
+          <div className="items-center flex md:text-base ml-auto">
+            <p className="w-[70px] sm:w-28 xl:w-48 text-center">Quantidade</p>
+            <p className="w-[70px] sm:w-28 xl:w-48 text-end">Preço</p>
           </div>
         </div>
         {cart.cartItems.length > 0 ? (
@@ -149,7 +147,7 @@ const Cart: React.FC = () => {
           <span className="text-3xl">{convertToCurrency(currentTotal)}</span>
           <button
             disabled={cart.cartItems.length === 0}
-            className="text-red-theme disabled:opacity-50 disabled:cursor-not-allowed flex gap-2 items-center mt-4 text-base"
+            className="text-red-theme disabled:opacity-50 disabled:cursor-not-allowed flex gap-2 items-center mt-4 md:text-base"
             onClick={onConfirmDeleteAllItems}
           >
             Esvaziar carrinho

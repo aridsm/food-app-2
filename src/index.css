@@ -56,6 +56,12 @@ input[type="number"] {
   width: 10px;
 }
 
+@media screen and (max-width: 600px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+}
+
 ::-webkit-scrollbar-track {
   @apply bg-white-beige;
 }

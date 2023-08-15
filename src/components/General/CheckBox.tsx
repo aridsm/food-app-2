@@ -8,9 +8,9 @@ const CheckBox: React.FC<{
   className?: string;
 }> = ({ onSelect, selected, semiSelected, className }) => {
   return (
-    <div className={`w-16 flex justify-start ${className}`}>
+    <div className={`w-8 sm:w-12 md:w-16 flex justify-start ${className}`}>
       <button
-        className="rounded-sm w-[26px] h-[26px] p-1 border border-neutral-400"
+        className="rounded-sm w-5 h-5 sm:w-[26px] sm:h-[26px] p-[1.5px] sm:p-1 border border-neutral-400"
         onClick={onSelect}
       >
         <div

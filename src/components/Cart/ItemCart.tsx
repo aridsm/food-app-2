@@ -118,7 +118,7 @@ const ItemCart: React.FC<{
       />
       <li
         key={item.id}
-        className={`flex text-base pt-4 ${
+        className={`flex items-center md:text-base pt-4 ${
           itemIsSelected ? "opacity-100" : "opacity-80"
         }`}
       >
@@ -127,7 +127,7 @@ const ItemCart: React.FC<{
           selected={itemIsSelected}
           className="self-center"
         />
-        <div className="basis-36 h-32 rounded-md overflow-hidden mr-6">
+        <div className="basis-10 h-10 sm:basis-28 sm:h-24 md:basis-36 md:h-32 rounded-md overflow-hidden mr-3 sm:mr-4 md:mr-6">
           <img
             src={`/src/assets/imgs/imgs-menu/${item.imgPath}`}
             alt={item.name}
@@ -137,7 +137,7 @@ const ItemCart: React.FC<{
         <div className="flex flex-1">
           <div className="flex flex-col">
             <p>{item.name}</p>
-            <span className="text-neutral-400">
+            <span className="mt-1 text-neutral-400 mb-1">
               Unid. {convertToCurrency(item.price)}
             </span>
             <button
@@ -148,10 +148,10 @@ const ItemCart: React.FC<{
               <FontAwesomeIcon icon={faTrashCan} />
             </button>
           </div>
-          <div className="w-48 ml-auto flex justify-center items-start pt-4">
+          <div className="w-[70px] sm:w-28 xl:w-48 ml-auto flex justify-center items-start pt-4">
             <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
           </div>
-          <p className="w-48 text-end  pt-5">
+          <p className="w-[70px] sm:w-28 xl:w-48 text-end pt-5">
             {convertToCurrency(item.price * item.quantity)}
           </p>
         </div>

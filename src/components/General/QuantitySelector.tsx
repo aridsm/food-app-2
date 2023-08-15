@@ -39,10 +39,10 @@ const QuantitySelector: React.FC<{
   };
 
   return (
-    <div className="flex gap-1 text-base ">
+    <div className="flex gap-[2px] sm:gap-1 sm:text-base ">
       <button
         disabled={quantity === 1}
-        className="text-red-theme px-2 hover:bg-neutral-200/[.4] text-xs rounded-sm disabled:text-red-theme/[.2] disabled:cursor-not-allowed"
+        className="text-red-theme px-2 hover:bg-neutral-200/[.4] text-[10px] sm:text-xs rounded-sm disabled:text-red-theme/[.2] disabled:cursor-not-allowed"
         onClick={decreaseQuantityHandler}
       >
         <FontAwesomeIcon icon={faMinus} />
@@ -50,14 +50,14 @@ const QuantitySelector: React.FC<{
       <input
         type="number"
         value={quantity}
-        className="px-2 py-1 w-10"
+        className="px-1 py-[3px] w-7 sm:px-2 sm:py-1 sm:w-10"
         min="1"
         max={maxQuantity}
         onChange={(e) => onChangeQuantity(e.target.value)}
       />
       <button
         disabled={quantity === maxQuantity}
-        className="text-red-theme px-2 hover:bg-neutral-200/[.4] text-xs rounded-sm disabled:text-red-theme/[.2] disabled:cursor-not-allowed"
+        className="text-red-theme px-2 hover:bg-neutral-200/[.4] text-[10px] sm:text-xs rounded-sm disabled:text-red-theme/[.2] disabled:cursor-not-allowed"
         onClick={increaseQuantityHandler}
       >
         <FontAwesomeIcon icon={faPlus} />

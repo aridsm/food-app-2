@@ -142,9 +142,9 @@ const Menu: React.FC = () => {
 
   return (
     <div>
-      <div className="flex justify-between mb-2">
+      <div className="flex justify-between items-center mb-2">
         <h2>Categorias</h2>
-        <div className="flex items-center text-base gap-4 text-neutral-400 -mb-3 z-10">
+        <div className="flex items-center md:text-base gap-4 text-neutral-400 -mb-[9px] z-10">
           <p>Preço</p>
           <div className="flex items-center">
             <div className="relative">
@@ -157,7 +157,7 @@ const Menu: React.FC = () => {
                 value={priceRange.min}
                 onChange={({ target }) => setMinValue(target.value)}
                 onBlur={() => onBlurPrice("min")}
-                className="w-20 p-1 pl-7 border-x-transparent border-b-2 border-t-transparent border-neutral-600 bg-transparent placeholder:text-neutral-600"
+                className="w-16 sm:w-20 p-1 pl-7 border-x-transparent sm:border-b-2 border-t-transparent border-neutral-600 bg-transparent placeholder:text-neutral-600"
               />
             </div>
 
@@ -172,7 +172,7 @@ const Menu: React.FC = () => {
                 value={priceRange.max}
                 onChange={({ target }) => setMaxValue(target.value)}
                 onBlur={() => onBlurPrice("max")}
-                className="w-20 p-1 pl-7 border-x-transparent border-b-2 border-t-transparent border-neutral-600 bg-transparent placeholder:text-neutral-600"
+                className="w-16 sm:w-20 p-1 pl-7 border-x-transparent sm:border-b-2 border-t-transparent border-neutral-600 bg-transparent placeholder:text-neutral-600"
               />
             </div>
           </div>
@@ -181,7 +181,7 @@ const Menu: React.FC = () => {
       <div ref={DivContainerList} className="overflow-hidden">
         <ul
           ref={UlMenuList}
-          className={`flex gap-12 relative top-0 left-0 text-neutral-400 border-y border-neutral-200 py-4 text-base w-fit ${classes.ulList}`}
+          className={`flex gap-4 md:gap-12 relative top-0 left-0 text-neutral-400 border-y border-neutral-200 py-2 md:py-4 md:text-base w-fit ${classes.ulList}`}
           onMouseDown={(e) => mouseDownAction(e)}
           onMouseMove={(e) => mouseMoveAction(e)}
           onMouseLeave={() => mouseLeaveAction()}
@@ -208,7 +208,10 @@ const Menu: React.FC = () => {
                     : "cursor-pointer"
                 }`}
               >
-                <FontAwesomeIcon icon={item.icon} className="text-lg" />
+                <FontAwesomeIcon
+                  icon={item.icon}
+                  className="text-sm md:text-lg"
+                />
                 <p className={isMoving ? "select-none" : "select-auto"}>
                   {item.name}
                 </p>
