@@ -7,13 +7,13 @@ const NavLinks: React.FC<{ className?: string }> = ({ className }) => {
 
   return (
     <nav
-      className={`${className} absolute z-10 xl:relative bg-red-theme xl:bg-transparent rounded-sm border-2 xl:border-0 border-white-beige`}
+      className={`${className} bg-white-beige absolute z-10 rounded-sm border-2 border-neutral-200`}
     >
-      <ul className="flex-col xl:flex-row xl:items-center flex gap-4 xl:gap-10 p-4 xl:p-0">
+      <ul className="flex-col flex gap-4 p-4 ">
         <li>
           <NavLink
             to="/"
-            className={`xl:border-b-[3px] ${
+            className={` ${
               currentPath === "/" ? classes.activeLink : "border-transparent"
             }`}
           >
@@ -23,7 +23,7 @@ const NavLinks: React.FC<{ className?: string }> = ({ className }) => {
         <li>
           <NavLink
             to="/menu"
-            className={`xl:px-1 border-b-[3px] ${
+            className={` border-b-[3px] ${
               currentPath === "/menu"
                 ? classes.activeLink
                 : "border-transparent"

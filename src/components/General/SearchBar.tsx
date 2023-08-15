@@ -67,9 +67,9 @@ const SearchBar: React.FC = () => {
   }, [dispatch, searchValue]);
 
   return (
-    <div ref={searchRef} className="flex items-center gap-4 relative">
+    <div ref={searchRef} className="flex items-stretch relative">
       <input
-        className={` px-2 py-1 text-sm absolute right-8 transition-all ${
+        className={`px-2 py-1 text-sm absolute right-9 transition-all ${
           searchBarVisible ? "w-40 opacity-100" : "w-0 opacity-0"
         }`}
         placeholder="Pesquisar..."
@@ -78,7 +78,11 @@ const SearchBar: React.FC = () => {
         onChange={({ target }) => setSearchValue(target.value)}
         onKeyDown={(e) => e.key === "Enter" && searchProduct()}
       />
-      <button title="Procurar item" onClick={handleButtonClick}>
+      <button
+        title="Procurar item"
+        className="w-8 h-8"
+        onClick={handleButtonClick}
+      >
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
     </div>
