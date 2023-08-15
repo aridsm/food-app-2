@@ -1,5 +1,4 @@
-import Header from "../../../components/Home/Header";
-import Header2 from "../../../components/General/Header";
+import Header from "../../../components/General/Header";
 import Content from "../../../components/Home/Content";
 import Footer from "../../../components/Home/Footer";
 import imgHome from "../../../assets/imgs/home-img.jpg";
@@ -42,8 +41,7 @@ const Home: React.FC = () => {
         <div className="w-full">
           <ArcSvg className="absolute top-[24px] xl:top-0 -right-[80px] xl:-right-[120px] rotate-180 -z-10" />
           <div className="max-w-[980px] xl:w-[840px] mx-auto xl:px-10 px-2 py-4 xl:py-8 min-h-screen flex flex-col">
-            <Header className="hidden xl:flex" />
-            <Header2 className="flex xl:hidden" />
+            <Header />
             <Content />
             <Footer />
           </div>

@@ -33,7 +33,7 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
           ref={refButtonMenu}
           aria-label="menu"
           className={` rounded-sm block border-2 transition-all w-8 h-8 ${
-            menuOpen ? "border-mostard" : "border-neutral-200/[.5]"
+            menuOpen ? "border-mostard" : "border-neutral-200/[.3]"
           }`}
           onClick={() => setMenuOpen(true)}
         >
