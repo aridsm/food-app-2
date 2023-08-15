@@ -31,7 +31,7 @@ const HomeMobile: React.FC<{ className?: string }> = ({ className }) => {
           <div className="w-4 h-16 sm:w-8 sm:h-24 bg-mostard rounded-sm"></div>
           <div className="w-4 h-20 sm:w-8 sm:h-28 bg-mostard rounded-sm"></div>
         </div>
-        <Header className=" text-white-beige py-6 max-w-[900px] w-full" />
+        <Header className="py-6 max-w-[900px] w-full" />
         <div className="w-fit flex flex-col text-center md:text-left max-w-[450px] md:max-w-[550px] lg:max-w-[750px] pt-6 lg:pt-10 pb-14 md:pb-20 lg:pb-24 self-center relative">
           <p className=" bg-white-beige/[.05] text-white-beige justify-center w-fit mx-auto md:mx-0 rounded-sm py-2 px-4 mb-4 flex items-center ">
             <FontAwesomeIcon icon={faClock} className="mr-3" />

@@ -31,11 +31,11 @@ ul {
 }
 
 .button {
-  @apply bg-red-theme px-8 py-3 rounded-sm table text-white-beige hover:bg-red-hover disabled:opacity-50 disabled:hover:bg-red-theme disabled:hover:cursor-not-allowed;
+  @apply bg-red-theme px-5 py-2 md:px-8 md:py-3 rounded-sm table text-white-beige hover:bg-red-hover disabled:opacity-50 disabled:hover:bg-red-theme disabled:hover:cursor-not-allowed;
 }
 
 .card {
-  box-shadow: 0 0 30px 0 #f0ede787;
+  box-shadow: 0 0 20px 0 #23232608;
 }
 
 input {

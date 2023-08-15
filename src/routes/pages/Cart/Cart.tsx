@@ -9,6 +9,7 @@ import { cartActions } from "../../../store/cartStore.store";
 import convertToCurrency from "../../../utils/convertToCurrency";
 import { useNavigate } from "react-router-dom";
 import ModalConfirm from "../../../components/General/ModalConfirm";
+import classes from "./Cart.module.css";
 
 const Cart: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
@@ -125,7 +126,9 @@ const Cart: React.FC = () => {
           </div>
         </div>
         {cart.cartItems.length > 0 ? (
-          <ul className="mt-4 flex flex-col divide-y-2 gap-4 h-[58vh] overflow-auto">
+          <ul
+            className={`mt-4 flex flex-col divide-y-2 gap-4 overflow-auto ${classes.container}`}
+          >
             {cart.cartItems.map((cartItem) => (
               <ItemCart
                 item={cartItem}
@@ -144,10 +147,12 @@ const Cart: React.FC = () => {
       <div className="flex justify-between items-end pt-4">
         <div>
           <p>Total</p>
-          <span className="text-3xl">{convertToCurrency(currentTotal)}</span>
+          <span className="text-xl sm:text-2xl md:text-3xl">
+            {convertToCurrency(currentTotal)}
+          </span>
           <button
             disabled={cart.cartItems.length === 0}
-            className="text-red-theme disabled:opacity-50 disabled:cursor-not-allowed flex gap-2 items-center mt-4 md:text-base"
+            className="text-red-theme disabled:opacity-50 disabled:cursor-not-allowed flex gap-2 items-center mt-2 md:mt-4 md:text-base"
             onClick={onConfirmDeleteAllItems}
           >
             Esvaziar carrinho
