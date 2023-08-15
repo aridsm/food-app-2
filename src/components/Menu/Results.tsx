@@ -167,12 +167,12 @@ const Results: React.FC<{
         </div>
       )}
 
-      <ul className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4 lg:gap-8 xl:gap-16 border-b border-neutral-200 pb-10">
+      <ul className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4 lg:gap-8 xl:gap-16 border-b border-neutral-200 pb-8 sm:pb-10">
         {shownMenuItems.length > 0 &&
           shownMenuItems.map((item) => (
             <li key={item.id}>
               <button
-                className={`bg-neutral-50 p-1 sm:p-2 lg:p-3 rounded-md text-left w-fit ${classes.card}`}
+                className={`bg-neutral-50 p-1 sm:p-2 lg:p-3 w-full h-full rounded-md text-left  ${classes.card}`}
                 onClick={() => openModalItemMenu(item)}
               >
                 <div className="w-full sm:h-48 xl:h-56 rounded-md overflow-hidden mb-3">
@@ -188,7 +188,7 @@ const Results: React.FC<{
                 </p>
                 <div className="flex items-center justify-between">
                   <div>{convertToCurrency(item.price)}</div>
-                  <div className="bg-red-theme rounded-sm text-white-beige hover:bg-red-hover px-3 py-1  sm:px-4 sm:py-[.4rem]">
+                  <div className="bg-red-theme rounded-sm text-white-beige hover:bg-red-hover px-3 py-1 sm:px-4 sm:py-[.4rem]">
                     Comprar
                   </div>
                 </div>

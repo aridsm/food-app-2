@@ -139,8 +139,8 @@ const Cart: React.FC = () => {
             ))}
           </ul>
         ) : (
-          <p className="h-[58vh] text-center pt-16">
-            Não há itens no carrinho!
+          <p className={`${classes.container} text-center pt-16`}>
+            Ainda não há itens no carrinho!
           </p>
         )}
       </div>

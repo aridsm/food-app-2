@@ -306,7 +306,7 @@ const Payment: React.FC = () => {
             paymentSelected === Payments.DebitCard) && <CardDataSection />}
         </section>
       </div>
-      <div className="flex-1 ml-12">
+      <div className="flex-1 ml-2 lg:ml-6 xl:ml-12">
         <div className=" bg-neutral-50 p-5 rounded-md card">
           <div className="flex justify-between items-center text-xl mb-6">
             <p>Total</p>
