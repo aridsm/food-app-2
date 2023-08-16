@@ -153,7 +153,7 @@ const Payment: React.FC = () => {
   }, [formInputs, paymentSelected, cepInvalid]);
 
   return (
-    <section className="flex gap-8 text-base items-start">
+    <section className="flex flex-col md:flex-row gap-6 md:gap-8 md:text-base items-start">
       <ModalConfirm
         close={onCloseModalAlert}
         message="O pedido foi finalizado! Aguarde enquanto preparamos o seu pedido"
@@ -161,18 +161,18 @@ const Payment: React.FC = () => {
         onConfirm={onCloseModalAlert}
         status={ColorsAlerts.Success}
       />
-      <div className="flex flex-col gap-12 basis-[50%]">
+      <div className="flex flex-col gap-12 w-full md:basis-[50%]">
         <section>
           <div className="mb-2 flex gap-2 items-center">
             <p>Seu pedido</p>
-            <span className="text-sm text-neutral-400">
+            <span className="md:text-sm text-neutral-400">
               {itemsCount} item(ns)
             </span>
           </div>
           <ul className="flex flex-col gap-4 divide-y-2 max-h-[300px] overflow-auto">
             {cart.selectedItems.map((item) => (
               <li className="flex gap-4 pt-4">
-                <div className="basis-20 h-20 rounded-md overflow-hidden">
+                <div className="basis-12 h-12 md:basis-20 md:h-20 rounded-md overflow-hidden">
                   <img
                     src={`/src/assets/imgs/imgs-menu/${item.imgPath}`}
                     alt={item.name}
@@ -180,7 +180,7 @@ const Payment: React.FC = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <span className="flex text-sm">
+                  <span className="flex md:text-sm">
                     <p className="mr-2">{item.name}</p>
                     <p>x{item.quantity}</p>
                   </span>
@@ -194,9 +194,12 @@ const Payment: React.FC = () => {
         </section>
         <section>
           <p className="mb-4">Endereço de entrega</p>
-          <form className="grid grid-cols-2 gap-4">
+          <form className="grid grid-cols-2 gap-2 md:gap-4">
             <div className="col-span-1 relative">
-              <label htmlFor="cep" className=" uppercase text-xs">
+              <label
+                htmlFor="cep"
+                className=" uppercase text-[10px] md:text-xs"
+              >
                 CEP <span className="text-red-500 text-base">*</span>
               </label>
               <input
@@ -208,7 +211,7 @@ const Payment: React.FC = () => {
                 placeholder="00000-000"
               />
               {(cepInvalid || formInputs.cep.trim().length !== 8) && (
-                <p className="text-xs mt-1 text-red-500">
+                <p className=" text-[10px] md:text-xs mt-1 text-red-500">
                   {errorMessage ? errorMessage : "O valor do CEP não é válido"}
                 </p>
               )}
@@ -218,7 +221,10 @@ const Payment: React.FC = () => {
               )}
             </div>
             <div className="col-span-1">
-              <label htmlFor="district" className=" uppercase text-xs">
+              <label
+                htmlFor="district"
+                className=" uppercase text-[10px] md:text-xs"
+              >
                 Bairro <span className="text-red-500 text-base">*</span>
               </label>
               <input
@@ -236,7 +242,10 @@ const Payment: React.FC = () => {
               />
             </div>
             <div className="col-span-1">
-              <label htmlFor="street" className=" uppercase text-xs">
+              <label
+                htmlFor="street"
+                className=" uppercase text-[10px] md:text-xs"
+              >
                 Rua <span className="text-red-500 text-base">*</span>
               </label>
               <input
@@ -251,7 +260,10 @@ const Payment: React.FC = () => {
               />
             </div>
             <div className="col-span-1">
-              <label htmlFor="number" className=" uppercase text-xs">
+              <label
+                htmlFor="number"
+                className=" uppercase text-[10px] md:text-xs"
+              >
                 Número <span className="text-red-500 text-base">*</span>
               </label>
               <input
@@ -264,7 +276,10 @@ const Payment: React.FC = () => {
               />
             </div>
             <div className="col-span-2">
-              <label htmlFor="comp" className=" uppercase text-xs">
+              <label
+                htmlFor="comp"
+                className=" uppercase text-[10px] md:text-xs"
+              >
                 Complemento
               </label>
               <input
@@ -285,7 +300,7 @@ const Payment: React.FC = () => {
         </section>
         <section>
           <p className="mb-4">Forma de pagamento</p>
-          <ul className="text-lg grid grid-cols-2 gap-4 mb-4">
+          <ul className="md:text-lg grid grid-cols-2 gap-4 mb-4">
             {payments.map((payment) => (
               <li key={payment.id}>
                 <button
@@ -306,17 +321,17 @@ const Payment: React.FC = () => {
             paymentSelected === Payments.DebitCard) && <CardDataSection />}
         </section>
       </div>
-      <div className="flex-1 ml-2 lg:ml-6 xl:ml-12">
-        <div className=" bg-neutral-50 p-5 rounded-md card">
-          <div className="flex justify-between items-center text-xl mb-6">
+      <div className="flex-1 w-full md:ml-2 lg:ml-6 xl:ml-12">
+        <div className=" bg-neutral-50 p-3 md:p-5 rounded-md card">
+          <div className="flex justify-between items-center text-lg md:text-xl mb-3 md:mb-6">
             <p>Total</p>
             <p>{convertToCurrency(cart.totalPriceSelectedItems)}</p>
           </div>
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-2 md:mb-4">
             <p>Desconto</p>
             <p className="text-neutral-400">R$ 0,00</p>
           </div>
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-2 md:mb-4">
             <p>Itens</p>
             <p className="text-neutral-400">10</p>
           </div>
@@ -340,7 +355,7 @@ const Payment: React.FC = () => {
           formInputs.district &&
           formInputs.number &&
           formInputs.cep && (
-            <div className="mt-6 bg-neutral-50 p-5 rounded-md card">
+            <div className="hidden md:block mt-6 bg-neutral-50 p-3 md:p-5 rounded-md card">
               <p className="mb-2 border-b-2 border-neutral-200 pb-2">
                 Confirme seu endereço
               </p>
