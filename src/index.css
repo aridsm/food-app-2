@@ -16,6 +16,18 @@ body {
   @apply text-neutral-600 text-xs sm:text-sm md:text-base xl:text-lg 2xl:text-xl bg-white-beige min-h-screen;
 }
 
+@media all and (min-width: 750px) and (max-width: 900px) and (min-height: 800px) {
+  body {
+    font-size: 18px !important;
+  }
+}
+
+@media all and (min-width: 750px) and (max-width: 950px) and (min-height: 1000px) {
+  body {
+    font-size: 20px !important;
+  }
+}
+
 button,
 a {
   color: inherit;
