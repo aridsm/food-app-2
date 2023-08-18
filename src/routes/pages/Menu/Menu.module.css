@@ -10,3 +10,20 @@
 .ulList {
   transition: 0.1s;
 }
+
+.containerCategories::-webkit-scrollbar {
+  width: 0px;
+  height: 7px;
+}
+
+.containerCategories::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.containerCategories:hover::-webkit-scrollbar-thumb {
+  @apply bg-neutral-200;
+}
+
+.containerCategories:hover::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-400;
+}

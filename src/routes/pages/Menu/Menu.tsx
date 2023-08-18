@@ -178,7 +178,10 @@ const Menu: React.FC = () => {
           </div>
         </div>
       </div>
-      <div ref={DivContainerList} className="overflow-hidden">
+      <div
+        ref={DivContainerList}
+        className={`overflow-auto ${classes.containerCategories}`}
+      >
         <ul
           ref={UlMenuList}
           className={`flex gap-4 md:gap-12 relative top-0 left-0 text-neutral-400 border-y border-neutral-200 py-2 md:py-4 md:text-base w-fit ${classes.ulList}`}
