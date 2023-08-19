@@ -1,6 +1,6 @@
-import mastercard from "../../assets/imgs/payment/mastercard.png";
-import visa from "../../assets/imgs/payment/visa.png";
-import aex from "../../assets/imgs/payment/aex.png";
+import mastercard from "../../assets/payment/mastercard.png";
+import visa from "../../assets/payment/visa.png";
+import aex from "../../assets/payment/aex.png";
 
 const CardDataSection: React.FC = () => {
   return (
