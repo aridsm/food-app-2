@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import MenuItem from "../../types/interfaces/menuItem";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CartItem from "../../types/CartItem";
 import QuantitySelector from "./QuantitySelector";
 import convertToCurrency from "../../utils/convertToCurrency";
@@ -14,7 +14,6 @@ const ModalContent: React.FC<{
   open: boolean;
 }> = ({ onClose, item, addItemToCart, open }) => {
   const [quantity, setQuantity] = useState<number>(1);
-  const [img, setImg] = useState("");
 
   const closeModalHandler = (event: React.MouseEvent) => {
     if (event.target === event.currentTarget) {
@@ -33,18 +32,6 @@ const ModalContent: React.FC<{
     setQuantity(1);
   };
 
-  useEffect(() => {
-    async function loadImage() {
-      if (item)
-        await import(`/src/assets/imgs/imgs-menu/${item.imgPath}.jpg`).then(
-          (module) => {
-            setImg(module.default);
-          }
-        );
-    }
-    loadImage();
-  }, [item]);
-
   return (
     <div
       className={`fixed bg-slate-600/[.2] w-full h-full z-40 grid place-items-center px-2 transition-all ${
@@ -61,7 +48,7 @@ const ModalContent: React.FC<{
       >
         <div className="h-60 md:h-64 w-full rounded-md overflow-hidden mb-3">
           <img
-            src={img}
+            src={item.img}
             alt={item?.name}
             className="w-full h-full object-cover object-center"
           />

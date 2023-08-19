@@ -176,7 +176,7 @@ const Results: React.FC<{
                 className={`bg-neutral-50 p-1 sm:p-2 lg:p-3 w-full h-full rounded-md text-left  ${classes.card}`}
                 onClick={() => openModalItemMenu(item)}
               >
-                <ImgResult name={item.name} path={item.imgPath} />
+                <ImgResult name={item.name} path={item.img} />
                 <p>{item.name}</p>
                 <p className="text-neutral-400 text-ellipsis overflow-hidden line-clamp-2 mb-5 mt-1">
                   {item.description}

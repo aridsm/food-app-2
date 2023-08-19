@@ -6,7 +6,7 @@ interface MenuItem {
   price: number;
   description: string;
   category: Categories;
-  imgPath: string;
+  img: string;
 }
 
 export default MenuItem;

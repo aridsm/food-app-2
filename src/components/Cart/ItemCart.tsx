@@ -128,7 +128,7 @@ const ItemCart: React.FC<{
           selected={itemIsSelected}
           className="self-center"
         />
-        <ImgCart name={item.name} path={item.imgPath} />
+        <ImgCart name={item.name} path={item.img} />
 
         <div className="flex flex-1 ml-4">
           <div className="flex flex-col">

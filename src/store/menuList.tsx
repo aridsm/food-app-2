@@ -1,5 +1,77 @@
 import Categories from "../types/enums/categories";
 import MenuItem from "../types/interfaces/menuItem";
+import sandi1 from "../assets/imgs-menu/sandwiches/i1.jpg";
+import sandi2 from "../assets/imgs-menu/sandwiches/i2.jpg";
+import sandi3 from "../assets/imgs-menu/sandwiches/i3.jpg";
+import sandi4 from "../assets/imgs-menu/sandwiches/i4.jpg";
+import sandi5 from "../assets/imgs-menu/sandwiches/i5.jpg";
+import sandi6 from "../assets/imgs-menu/sandwiches/i6.jpg";
+import sandi7 from "../assets/imgs-menu/sandwiches/i7.jpg";
+import sandi8 from "../assets/imgs-menu/sandwiches/i8.jpg";
+
+import dess1 from "../assets/imgs-menu/desserts/i1.jpg";
+import dess2 from "../assets/imgs-menu/desserts/i2.jpg";
+import dess3 from "../assets/imgs-menu/desserts/i3.jpg";
+import dess4 from "../assets/imgs-menu/desserts/i4.jpg";
+import dess5 from "../assets/imgs-menu/desserts/i5.jpg";
+import dess6 from "../assets/imgs-menu/desserts/i6.jpg";
+import dess7 from "../assets/imgs-menu/desserts/i7.jpg";
+import dess8 from "../assets/imgs-menu/desserts/i8.jpg";
+import dess9 from "../assets/imgs-menu/desserts/i9.jpg";
+import dess10 from "../assets/imgs-menu/desserts/i10.jpg";
+import dess11 from "../assets/imgs-menu/desserts/i11.jpg";
+import dess12 from "../assets/imgs-menu/desserts/i12.jpg";
+
+import hea1 from "../assets/imgs-menu/healthy/i1.jpg";
+import hea2 from "../assets/imgs-menu/healthy/i2.jpg";
+import hea3 from "../assets/imgs-menu/healthy/i3.jpg";
+import hea4 from "../assets/imgs-menu/healthy/i4.jpg";
+import hea5 from "../assets/imgs-menu/healthy/i5.jpg";
+import hea6 from "../assets/imgs-menu/healthy/i6.jpg";
+import hea7 from "../assets/imgs-menu/healthy/i7.jpg";
+import hea8 from "../assets/imgs-menu/healthy/i8.jpg";
+import hea9 from "../assets/imgs-menu/healthy/i9.jpg";
+import hea10 from "../assets/imgs-menu/healthy/i10.jpg";
+import hea11 from "../assets/imgs-menu/healthy/i11.jpg";
+
+import piz1 from "../assets/imgs-menu/pizzas/i1.jpg";
+import piz2 from "../assets/imgs-menu/pizzas/i2.jpg";
+import piz3 from "../assets/imgs-menu/pizzas/i3.jpg";
+import piz4 from "../assets/imgs-menu/pizzas/i4.jpg";
+import piz5 from "../assets/imgs-menu/pizzas/i5.jpg";
+import piz6 from "../assets/imgs-menu/pizzas/i6.jpg";
+import piz7 from "../assets/imgs-menu/pizzas/i7.jpg";
+import piz8 from "../assets/imgs-menu/pizzas/i8.jpg";
+import piz9 from "../assets/imgs-menu/pizzas/i9.jpg";
+import piz10 from "../assets/imgs-menu/pizzas/i10.jpg";
+
+import ot1 from "../assets/imgs-menu/others/i1.jpg";
+import ot2 from "../assets/imgs-menu/others/i2.jpg";
+import ot3 from "../assets/imgs-menu/others/i3.jpg";
+import ot4 from "../assets/imgs-menu/others/i4.jpg";
+import ot5 from "../assets/imgs-menu/others/i5.jpg";
+import ot6 from "../assets/imgs-menu/others/i6.jpg";
+import ot7 from "../assets/imgs-menu/others/i7.jpg";
+import ot8 from "../assets/imgs-menu/others/i8.jpg";
+import ot9 from "../assets/imgs-menu/others/i9.jpg";
+
+import veg1 from "../assets/imgs-menu/vegan/i1.jpg";
+import veg2 from "../assets/imgs-menu/vegan/i2.jpg";
+import veg3 from "../assets/imgs-menu/vegan/i3.jpg";
+import veg4 from "../assets/imgs-menu/vegan/i4.jpg";
+import veg5 from "../assets/imgs-menu/vegan/i5.jpg";
+import veg6 from "../assets/imgs-menu/vegan/i6.jpg";
+import veg7 from "../assets/imgs-menu/vegan/i7.jpg";
+import veg8 from "../assets/imgs-menu/vegan/i8.jpg";
+
+import dr1 from "../assets/imgs-menu/drinks/i1.jpg";
+import dr2 from "../assets/imgs-menu/drinks/i2.jpg";
+import dr3 from "../assets/imgs-menu/drinks/i3.jpg";
+import dr4 from "../assets/imgs-menu/drinks/i4.jpg";
+import dr5 from "../assets/imgs-menu/drinks/i5.jpg";
+import dr6 from "../assets/imgs-menu/drinks/i6.jpg";
+import dr7 from "../assets/imgs-menu/drinks/i7.jpg";
+import dr8 from "../assets/imgs-menu/drinks/i8.jpg";
 
 const menuItems: MenuItem[] = [
   {
@@ -8,7 +80,7 @@ const menuItems: MenuItem[] = [
     category: Categories.Sandwiches,
     description: " Quisque nec nisi lobortis, varius est at.",
     price: 31.59,
-    imgPath: "sandwiches/i6",
+    img: sandi6,
   },
   {
     name: "Pellentesque",
@@ -17,7 +89,7 @@ const menuItems: MenuItem[] = [
     description:
       "Phasellus mollis non lectus at scelerisque. Cras quis dictum neque.",
     price: 14.99,
-    imgPath: "desserts/i4",
+    img: dess4,
   },
   {
     name: "Cras sit amet",
@@ -26,8 +98,9 @@ const menuItems: MenuItem[] = [
     description:
       "Mauris vel suscipit lectus. Phasellus sit amet volutpat urna. Ut accumsan venenatis nunc.",
     price: 10.99,
-    imgPath: "healthy/i2",
+    img: hea2,
   },
+
   {
     name: "Ipsum Enim",
     id: 47,
@@ -35,7 +108,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam a ex sollicitudin, accumsan mi id, sodales leo. Cras sit amet mattis nunc. Nam velit augue, pellentesque eu erat vitae, interdum pharetra diam.",
     price: 42.99,
-    imgPath: "pizzas/i7",
+    img: piz7,
   },
   {
     name: "Mauris",
@@ -44,34 +117,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 23.99,
-    imgPath: "healthy/i1",
-  },
-  {
-    name: "Placerat",
-    id: 7,
-    category: Categories.Desserts,
-    description:
-      "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
-    price: 17.39,
-    imgPath: "desserts/i7",
-  },
-  {
-    name: "Commodo",
-    id: 1,
-    category: Categories.Desserts,
-    description:
-      "Mauris vel suscipit lectus. Phasellus sit amet volutpat urna. Ut accumsan venenatis nunc.",
-    price: 37.39,
-    imgPath: "desserts/i1",
-  },
-  {
-    name: "Laoreet",
-    id: 48,
-    category: Categories.Pizzas,
-    description:
-      "Etiam placerat id arcu non pellentesque. Ut augue nisi, gravida quis arcu tristique, dignissim malesuada nisl. In at diam quis turpis vehicula rutrum.",
-    price: 26.99,
-    imgPath: "pizzas/i8",
+    img: hea1,
   },
   {
     name: "Cras sit amet",
@@ -80,8 +126,36 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam a ex sollicitudin, accumsan mi id, sodales leo. Cras sit amet mattis nunc. Nam velit augue, pellentesque eu erat vitae, interdum pharetra diam.",
     price: 20.59,
-    imgPath: "others/i4",
+    img: ot4,
   },
+  {
+    name: "Placerat",
+    id: 7,
+    category: Categories.Desserts,
+    description:
+      "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
+    price: 17.39,
+    img: dess7,
+  },
+  {
+    name: "Commodo",
+    id: 1,
+    category: Categories.Desserts,
+    description:
+      "Mauris vel suscipit lectus. Phasellus sit amet volutpat urna. Ut accumsan venenatis nunc.",
+    price: 37.39,
+    img: dess1,
+  },
+  {
+    name: "Laoreet",
+    id: 48,
+    category: Categories.Pizzas,
+    description:
+      "Etiam placerat id arcu non pellentesque. Ut augue nisi, gravida quis arcu tristique, dignissim malesuada nisl. In at diam quis turpis vehicula rutrum.",
+    price: 26.99,
+    img: piz8,
+  },
+
   {
     name: "Pellentesque",
     id: 36,
@@ -89,7 +163,7 @@ const menuItems: MenuItem[] = [
     description:
       "Phasellus mollis non lectus at scelerisque. Cras quis dictum neque.",
     price: 19.39,
-    imgPath: "others/i5",
+    img: ot5,
   },
   {
     name: "Aliquet",
@@ -98,7 +172,7 @@ const menuItems: MenuItem[] = [
     description:
       "Mauris vel suscipit lectus. Phasellus sit amet volutpat urna. Ut accumsan venenatis nunc.",
     price: 8.99,
-    imgPath: "desserts/i6",
+    img: dess6,
   },
 
   {
@@ -108,7 +182,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 2.99,
-    imgPath: "drinks/i4",
+    img: dr4,
   },
   {
     name: "Placerat",
@@ -117,7 +191,7 @@ const menuItems: MenuItem[] = [
     description:
       "Phasellus mollis non lectus at scelerisque. Cras quis dictum neque.",
     price: 25.39,
-    imgPath: "desserts/i9",
+    img: dess9,
   },
 
   {
@@ -127,7 +201,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam placerat id arcu non pellentesque. Ut augue nisi, gravida quis arcu tristique, dignissim malesuada nisl. In at diam quis turpis vehicula rutrum.",
     price: 38.59,
-    imgPath: "vegan/i4",
+    img: veg4,
   },
 
   {
@@ -137,7 +211,7 @@ const menuItems: MenuItem[] = [
     description:
       "Suspendisse volutpat vel elit ut cursus. Proin in commodo metus, quis accumsan nulla. Pellentesque congue ut ipsum a pharetra.",
     price: 23.59,
-    imgPath: "vegan/i5",
+    img: veg5,
   },
   {
     name: "Phasellus",
@@ -146,7 +220,7 @@ const menuItems: MenuItem[] = [
     description:
       "Mauris vel suscipit lectus. Phasellus sit amet volutpat urna. Ut accumsan venenatis nunc.",
     price: 21.99,
-    imgPath: "desserts/i10",
+    img: dess10,
   },
 
   {
@@ -156,7 +230,7 @@ const menuItems: MenuItem[] = [
     description:
       "Mauris vel suscipit lectus. Phasellus sit amet volutpat urna. Ut accumsan venenatis nunc.",
     price: 1.99,
-    imgPath: "drinks/i1",
+    img: dr1,
   },
   {
     name: "Mauris",
@@ -165,7 +239,7 @@ const menuItems: MenuItem[] = [
     description:
       "Phasellus mollis non lectus at scelerisque. Cras quis dictum neque.",
     price: 20.39,
-    imgPath: "healthy/i8",
+    img: hea8,
   },
   {
     name: "Placerat",
@@ -174,7 +248,7 @@ const menuItems: MenuItem[] = [
     description:
       "Suspendisse volutpat vel elit ut cursus. Proin in commodo metus, quis accumsan nulla. Pellentesque congue ut ipsum a pharetra.",
     price: 3.99,
-    imgPath: "drinks/i2",
+    img: dr2,
   },
   {
     name: "Laoreet",
@@ -183,7 +257,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 27.99,
-    imgPath: "vegan/i3",
+    img: veg3,
   },
 
   {
@@ -193,7 +267,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam placerat id arcu non pellentesque. Ut augue nisi, gravida quis arcu tristique, dignissim malesuada nisl. In at diam quis turpis vehicula rutrum.",
     price: 9.99,
-    imgPath: "drinks/i7",
+    img: dr7,
   },
 
   {
@@ -203,7 +277,7 @@ const menuItems: MenuItem[] = [
     description:
       "Phasellus mollis non lectus at scelerisque. Cras quis dictum neque.",
     price: 30.99,
-    imgPath: "healthy/i3",
+    img: hea3,
   },
   {
     name: "At Magna",
@@ -212,7 +286,7 @@ const menuItems: MenuItem[] = [
     description:
       "Suspendisse volutpat vel elit ut cursus. Proin in commodo metus, quis accumsan nulla. Pellentesque congue ut ipsum a pharetra.",
     price: 6.99,
-    imgPath: "drinks/i8",
+    img: dr8,
   },
   {
     name: "Laoreet",
@@ -221,17 +295,9 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam a ex sollicitudin, accumsan mi id, sodales leo. Cras sit amet mattis nunc. Nam velit augue, pellentesque eu erat vitae, interdum pharetra diam.",
     price: 24.39,
-    imgPath: "healthy/i4",
+    img: hea4,
   },
-  {
-    name: "Eleifend",
-    id: 17,
-    category: Categories.Drinks,
-    description:
-      "Etiam a ex sollicitudin, accumsan mi id, sodales leo. Cras sit amet mattis nunc. Nam velit augue, pellentesque eu erat vitae, interdum pharetra diam.",
-    price: 5.99,
-    imgPath: "drinks/i5",
-  },
+
   {
     name: "Placerat",
     id: 25,
@@ -239,7 +305,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 23.29,
-    imgPath: "healthy/i5",
+    img: hea5,
   },
   {
     name: "Laoreet",
@@ -248,7 +314,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam placerat id arcu non pellentesque. Ut augue nisi, gravida quis arcu tristique, dignissim malesuada nisl. In at diam quis turpis vehicula rutrum.",
     price: 26.99,
-    imgPath: "vegan/i7",
+    img: veg7,
   },
   {
     name: "Laoreet",
@@ -257,7 +323,7 @@ const menuItems: MenuItem[] = [
     description:
       "Mauris vel suscipit lectus. Phasellus sit amet volutpat urna. Ut accumsan venenatis nunc.",
     price: 3.99,
-    imgPath: "drinks/i3",
+    img: dr3,
   },
   {
     name: "Placerat",
@@ -266,7 +332,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 25.29,
-    imgPath: "vegan/i8",
+    img: veg8,
   },
   {
     name: "Donec",
@@ -275,7 +341,7 @@ const menuItems: MenuItem[] = [
     description:
       "Suspendisse volutpat vel elit ut cursus. Proin in commodo metus, quis accumsan nulla. Pellentesque congue ut ipsum a pharetra.",
     price: 20.99,
-    imgPath: "healthy/i7",
+    img: hea7,
   },
 
   {
@@ -285,7 +351,16 @@ const menuItems: MenuItem[] = [
     description:
       "Mauris vel suscipit lectus. Phasellus sit amet volutpat urna. Ut accumsan venenatis nunc.",
     price: 40.39,
-    imgPath: "healthy/i9",
+    img: hea9,
+  },
+  {
+    name: "Eleifend",
+    id: 17,
+    category: Categories.Drinks,
+    description:
+      "Etiam a ex sollicitudin, accumsan mi id, sodales leo. Cras sit amet mattis nunc. Nam velit augue, pellentesque eu erat vitae, interdum pharetra diam.",
+    price: 5.99,
+    img: dr5,
   },
   {
     name: "Placerat",
@@ -294,7 +369,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam a ex sollicitudin, accumsan mi id, sodales leo. Cras sit amet mattis nunc. Nam velit augue, pellentesque eu erat vitae, interdum pharetra diam.",
     price: 27.99,
-    imgPath: "healthy/i10",
+    img: hea10,
   },
   {
     name: "Commodo",
@@ -303,7 +378,7 @@ const menuItems: MenuItem[] = [
     description:
       "Suspendisse volutpat vel elit ut cursus. Proin in commodo metus, quis accumsan nulla. Pellentesque congue ut ipsum a pharetra.",
     price: 21.99,
-    imgPath: "others/i1",
+    img: ot1,
   },
   {
     name: "Nisi",
@@ -312,7 +387,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam placerat id arcu non pellentesque. Ut augue nisi, gravida quis arcu tristique, dignissim malesuada nisl. In at diam quis turpis vehicula rutrum.",
     price: 25.99,
-    imgPath: "others/i2",
+    img: ot2,
   },
   {
     name: "Pellentesque",
@@ -321,7 +396,7 @@ const menuItems: MenuItem[] = [
     description:
       "Mauris vel suscipit lectus. Phasellus sit amet volutpat urna. Ut accumsan venenatis nunc.",
     price: 8.99,
-    imgPath: "drinks/i6",
+    img: dr6,
   },
   {
     name: "Pellentesque",
@@ -330,7 +405,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 40.99,
-    imgPath: "pizzas/i5",
+    img: piz5,
   },
   {
     name: "Laoreet",
@@ -339,7 +414,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam placerat id arcu non pellentesque. Ut augue nisi, gravida quis arcu tristique, dignissim malesuada nisl. In at diam quis turpis vehicula rutrum.",
     price: 42.39,
-    imgPath: "pizzas/i6",
+    img: piz6,
   },
   {
     name: "Phasellus",
@@ -348,7 +423,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam placerat id arcu non pellentesque. Ut augue nisi, gravida quis arcu tristique, dignissim malesuada nisl. In at diam quis turpis vehicula rutrum.",
     price: 20.99,
-    imgPath: "healthy/i6",
+    img: hea6,
   },
   {
     name: "Laoreet",
@@ -357,7 +432,7 @@ const menuItems: MenuItem[] = [
     description:
       "Suspendisse volutpat vel elit ut cursus. Proin in commodo metus, quis accumsan nulla. Pellentesque congue ut ipsum a pharetra.",
     price: 18.99,
-    imgPath: "others/i6",
+    img: ot6,
   },
   {
     name: "Commodo",
@@ -366,7 +441,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam a ex sollicitudin, accumsan mi id, sodales leo. Cras sit amet mattis nunc. Nam velit augue, pellentesque eu erat vitae, interdum pharetra diam.",
     price: 24.39,
-    imgPath: "others/i7",
+    img: ot7,
   },
   {
     name: "Phasellus",
@@ -375,7 +450,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 20.99,
-    imgPath: "others/i8",
+    img: ot8,
   },
   {
     name: "Donec",
@@ -384,7 +459,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam placerat id arcu non pellentesque. Ut augue nisi, gravida quis arcu tristique, dignissim malesuada nisl. In at diam quis turpis vehicula rutrum.",
     price: 22.29,
-    imgPath: "others/i9",
+    img: ot9,
   },
   {
     name: "Iaculis",
@@ -393,16 +468,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam a ex sollicitudin, accumsan mi id, sodales leo. Cras sit amet mattis nunc. Nam velit augue, pellentesque eu erat vitae, interdum pharetra diam.",
     price: 39.39,
-    imgPath: "pizzas/i1",
-  },
-  {
-    name: "Placerat",
-    id: 42,
-    category: Categories.Pizzas,
-    description:
-      "Phasellus mollis non lectus at scelerisque. Cras quis dictum neque.",
-    price: 30.99,
-    imgPath: "pizzas/i2",
+    img: piz1,
   },
   {
     name: "Aliquet",
@@ -411,7 +477,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 36.99,
-    imgPath: "pizzas/i3",
+    img: piz3,
   },
   {
     name: "Placerat",
@@ -420,7 +486,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 20.99,
-    imgPath: "others/i3",
+    img: ot3,
   },
   {
     name: "Iaculis",
@@ -429,7 +495,7 @@ const menuItems: MenuItem[] = [
     description:
       "Suspendisse volutpat vel elit ut cursus. Proin in commodo metus, quis accumsan nulla. Pellentesque congue ut ipsum a pharetra.",
     price: 39.39,
-    imgPath: "pizzas/i4",
+    img: piz4,
   },
 
   {
@@ -439,7 +505,7 @@ const menuItems: MenuItem[] = [
     description:
       "Mauris vel suscipit lectus. Phasellus sit amet volutpat urna. Ut accumsan venenatis nunc.",
     price: 10.99,
-    imgPath: "desserts/i2",
+    img: dess2,
   },
   {
     name: "Laoreet",
@@ -448,7 +514,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 17.39,
-    imgPath: "desserts/i3",
+    img: dess3,
   },
   {
     name: "Quisque",
@@ -457,7 +523,7 @@ const menuItems: MenuItem[] = [
     description:
       "Suspendisse volutpat vel elit ut cursus. Proin in commodo metus, quis accumsan nulla. Pellentesque congue ut ipsum a pharetra.",
     price: 30.99,
-    imgPath: "pizzas/i10",
+    img: piz10,
   },
   {
     name: "Placerat",
@@ -466,7 +532,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 24.29,
-    imgPath: "sandwiches/i1",
+    img: sandi1,
   },
 
   {
@@ -476,7 +542,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam a ex sollicitudin, accumsan mi id, sodales leo. Cras sit amet mattis nunc. Nam velit augue, pellentesque eu erat vitae, interdum pharetra diam.",
     price: 20.99,
-    imgPath: "desserts/i12",
+    img: dess12,
   },
 
   {
@@ -486,7 +552,7 @@ const menuItems: MenuItem[] = [
     description:
       "Suspendisse volutpat vel elit ut cursus. Proin in commodo metus, quis accumsan nulla. Pellentesque congue ut ipsum a pharetra.",
     price: 19.99,
-    imgPath: "sandwiches/i3",
+    img: sandi3,
   },
 
   {
@@ -496,7 +562,7 @@ const menuItems: MenuItem[] = [
     description:
       "Mauris vel suscipit lectus. Phasellus sit amet volutpat urna. Ut accumsan venenatis nunc.",
     price: 22.99,
-    imgPath: "sandwiches/i5",
+    img: sandi5,
   },
 
   {
@@ -506,7 +572,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 8.99,
-    imgPath: "desserts/i11",
+    img: dess11,
   },
   {
     name: "Phasellus",
@@ -515,7 +581,7 @@ const menuItems: MenuItem[] = [
     description:
       "Phasellus mollis non lectus at scelerisque. Cras quis dictum neque.",
     price: 35.39,
-    imgPath: "pizzas/i9",
+    img: piz9,
   },
   {
     name: "Donec",
@@ -524,7 +590,16 @@ const menuItems: MenuItem[] = [
     description:
       "Suspendisse volutpat vel elit ut cursus. Proin in commodo metus, quis accumsan nulla. Pellentesque congue ut ipsum a pharetra.",
     price: 20.99,
-    imgPath: "desserts/i8",
+    img: dess8,
+  },
+  {
+    name: "Placerat",
+    id: 42,
+    category: Categories.Pizzas,
+    description:
+      "Phasellus mollis non lectus at scelerisque. Cras quis dictum neque.",
+    price: 30.99,
+    img: piz2,
   },
   {
     name: "Phasellus",
@@ -533,7 +608,7 @@ const menuItems: MenuItem[] = [
     description:
       "Phasellus mollis non lectus at scelerisque. Cras quis dictum neque.",
     price: 15.59,
-    imgPath: "sandwiches/i7",
+    img: sandi7,
   },
   {
     name: "Quisque",
@@ -542,7 +617,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam placerat id arcu non pellentesque. Ut augue nisi, gravida quis arcu tristique, dignissim malesuada nisl. In at diam quis turpis vehicula rutrum.",
     price: 20.29,
-    imgPath: "sandwiches/i8",
+    img: sandi8,
   },
   {
     name: "Eleifend",
@@ -551,7 +626,7 @@ const menuItems: MenuItem[] = [
     description:
       "Phasellus mollis non lectus at scelerisque. Cras quis dictum neque.",
     price: 28.59,
-    imgPath: "vegan/i1",
+    img: veg1,
   },
   {
     name: "Pellentesque",
@@ -560,7 +635,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 22.99,
-    imgPath: "sandwiches/i4",
+    img: sandi4,
   },
   {
     name: "Placerat",
@@ -569,7 +644,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam a ex sollicitudin, accumsan mi id, sodales leo. Cras sit amet mattis nunc. Nam velit augue, pellentesque eu erat vitae, interdum pharetra diam.",
     price: 23.59,
-    imgPath: "vegan/i2",
+    img: veg2,
   },
 
   {
@@ -579,7 +654,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam placerat id arcu non pellentesque. Ut augue nisi, gravida quis arcu tristique, dignissim malesuada nisl. In at diam quis turpis vehicula rutrum.",
     price: 12.29,
-    imgPath: "desserts/i5",
+    img: dess5,
   },
   {
     name: "Laoreet",
@@ -588,7 +663,7 @@ const menuItems: MenuItem[] = [
     description:
       "Cras placerat lorem in lorem aliquet blandit. Morbi eget pellentesque dolor. Ut ultrices mi et lacinia malesuada.",
     price: 21.99,
-    imgPath: "healthy/i11",
+    img: hea11,
   },
   {
     name: "Pellentesque",
@@ -597,7 +672,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam a ex sollicitudin, accumsan mi id, sodales leo. Cras sit amet mattis nunc. Nam velit augue, pellentesque eu erat vitae, interdum pharetra diam.",
     price: 27.99,
-    imgPath: "vegan/i6",
+    img: veg6,
   },
 
   {
@@ -607,7 +682,7 @@ const menuItems: MenuItem[] = [
     description:
       "Etiam placerat id arcu non pellentesque. Ut augue nisi, gravida quis arcu tristique, dignissim malesuada nisl. In at diam quis turpis vehicula rutrum.",
     price: 20.59,
-    imgPath: "sandwiches/i2",
+    img: sandi2,
   },
 ];
 
