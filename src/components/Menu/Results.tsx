@@ -177,7 +177,7 @@ const Results: React.FC<{
               >
                 <div className="w-full sm:h-48 xl:h-56 rounded-md overflow-hidden mb-3">
                   <img
-                    src={`/assets/imgs/imgs-menu/${item.imgPath}`}
+                    src={`/src/assets/imgs/imgs-menu/${item.imgPath}`}
                     alt={item.name}
                     className="w-full h-full object-cover"
                   />
