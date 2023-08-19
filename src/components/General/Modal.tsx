@@ -48,7 +48,7 @@ const ModalContent: React.FC<{
       >
         <div className="h-60 md:h-64 w-full rounded-md overflow-hidden mb-3">
           <img
-            src={`/src/assets/imgs/imgs-menu/${item?.imgPath}`}
+            src={`/assets/imgs/imgs-menu/${item?.imgPath}`}
             alt={item?.name}
             className="w-full h-full object-cover object-center"
           />
