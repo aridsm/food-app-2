@@ -8,6 +8,7 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import CheckBox from "../General/CheckBox";
 import convertToCurrency from "../../utils/convertToCurrency";
 import ModalConfirm from "../General/ModalConfirm";
+import ImgCart from "../General/ImgCart";
 
 const ItemCart: React.FC<{
   item: CartItem;
@@ -127,14 +128,9 @@ const ItemCart: React.FC<{
           selected={itemIsSelected}
           className="self-center"
         />
-        <div className="basis-10 h-10 sm:basis-28 sm:h-24 md:basis-36 md:h-32 rounded-md overflow-hidden mr-3 sm:mr-4 md:mr-6">
-          <img
-            src={`/assets/imgs/imgs-menu/${item.imgPath}`}
-            alt={item.name}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="flex flex-1">
+        <ImgCart name={item.name} path={item.imgPath} />
+
+        <div className="flex flex-1 ml-4">
           <div className="flex flex-col">
             <p>{item.name}</p>
             <span className="mt-1 text-neutral-400 mb-1">

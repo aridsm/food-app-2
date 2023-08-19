@@ -13,6 +13,7 @@ import Pagination from "./Pagination";
 import Page from "../../types/interfaces/page";
 import convertToCurrency from "../../utils/convertToCurrency";
 import setURLQueryParams from "../../utils/queryParams";
+import ImgResult from "./ImgResult";
 
 const itemsPerPage = 9;
 
@@ -175,13 +176,7 @@ const Results: React.FC<{
                 className={`bg-neutral-50 p-1 sm:p-2 lg:p-3 w-full h-full rounded-md text-left  ${classes.card}`}
                 onClick={() => openModalItemMenu(item)}
               >
-                <div className="w-full sm:h-48 xl:h-56 rounded-md overflow-hidden mb-3">
-                  <img
-                    src={`/src/assets/imgs/imgs-menu/${item.imgPath}`}
-                    alt={item.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <ImgResult name={item.name} path={item.imgPath} />
                 <p>{item.name}</p>
                 <p className="text-neutral-400 text-ellipsis overflow-hidden line-clamp-2 mb-5 mt-1">
                   {item.description}

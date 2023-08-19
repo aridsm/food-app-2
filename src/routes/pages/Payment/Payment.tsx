@@ -16,6 +16,7 @@ import ModalConfirm from "../../../components/General/ModalConfirm";
 import ColorsAlerts from "../../../types/enums/colorsAlert";
 import { useNavigate } from "react-router-dom";
 import { cartActions } from "../../../store/cartStore.store";
+import ImgCart from "../../../components/General/ImgCart";
 
 const payments: { name: string; id: Payments; icon: IconDefinition }[] = [
   {
@@ -172,13 +173,7 @@ const Payment: React.FC = () => {
           <ul className="flex flex-col gap-4 divide-y-2 max-h-[300px] overflow-auto">
             {cart.selectedItems.map((item) => (
               <li className="flex gap-4 pt-4">
-                <div className="basis-12 h-12 md:basis-20 md:h-20 rounded-md overflow-hidden">
-                  <img
-                    src={`/assets/imgs/imgs-menu/${item.imgPath}`}
-                    alt={item.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <ImgCart name={item.name} path={item.imgPath} />
                 <div className="flex flex-col">
                   <span className="flex md:text-sm">
                     <p className="mr-2">{item.name}</p>
