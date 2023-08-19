@@ -129,7 +129,7 @@ const ItemCart: React.FC<{
         />
         <div className="basis-10 h-10 sm:basis-28 sm:h-24 md:basis-36 md:h-32 rounded-md overflow-hidden mr-3 sm:mr-4 md:mr-6">
           <img
-            src={`/assets/imgs/imgs-menu/${item.imgPath}`}
+            src={`src/assets/imgs-menu/${item.imgPath}`}
             alt={item.name}
             className="w-full h-full object-cover"
           />

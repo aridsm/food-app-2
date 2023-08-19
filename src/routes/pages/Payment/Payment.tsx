@@ -174,7 +174,7 @@ const Payment: React.FC = () => {
               <li className="flex gap-4 pt-4">
                 <div className="basis-12 h-12 md:basis-20 md:h-20 rounded-md overflow-hidden">
                   <img
-                    src={`/assets/imgs/imgs-menu/${item.imgPath}`}
+                    src={`src/assets/imgs-menu/${item.imgPath}`}
                     alt={item.name}
                     className="w-full h-full object-cover"
                   />
