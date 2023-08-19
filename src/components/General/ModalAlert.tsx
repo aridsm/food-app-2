@@ -19,7 +19,7 @@ const ModalContent: React.FC<{
   open: boolean;
 }> = ({ onClose, message, color, open }) => {
   const [currentIcon, setCurrentIcon] = useState<IconDefinition>(faCircleCheck);
-  const refTimer = useRef<NodeJS.Timeout>();
+  const refTimer = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     if (color === ColorsAlerts.Alert) {
