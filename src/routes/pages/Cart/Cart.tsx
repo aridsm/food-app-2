@@ -135,6 +135,7 @@ const Cart: React.FC = () => {
                 selectedItems={selectedItems}
                 setSelectedItems={setSelectedItems}
                 recountTotal={recountTotal}
+                key={cartItem.id}
               />
             ))}
           </ul>

@@ -172,7 +172,7 @@ const Payment: React.FC = () => {
           </div>
           <ul className="flex flex-col gap-4 divide-y-2 max-h-[300px] overflow-auto">
             {cart.selectedItems.map((item) => (
-              <li className="flex gap-4 pt-4">
+              <li className="flex gap-4 pt-4" key={item.id}>
                 <ImgCart name={item.name} path={item.img} />
                 <div className="flex flex-col">
                   <span className="flex md:text-sm">
