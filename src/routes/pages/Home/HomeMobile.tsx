@@ -33,7 +33,7 @@ const HomeMobile: React.FC<{ className?: string }> = ({ className }) => {
           <div className="w-4 h-16 sm:w-8 sm:h-24 bg-mostard rounded-sm"></div>
           <div className="w-4 h-20 sm:w-8 sm:h-28 bg-mostard rounded-sm"></div>
         </div>
-        <Header className="py-6 max-w-[900px] w-full" />
+        <Header className="py-6 px-3 max-w-[900px] w-full" />
         <div className="w-fit flex flex-col my-auto text-center lg:text-left max-w-[450px] md:max-w-[550px] lg:max-w-[750px] pt-6 lg:pt-10 pb-14 md:pb-20 lg:pb-24 self-center relative">
           <p className="bg-white-beige/[.05] text-white-beige justify-center w-fit mx-auto lg:mx-0 rounded-sm py-2 px-4 mb-4 flex items-center ">
             <FontAwesomeIcon icon={faClock} className="mr-3" />
@@ -49,7 +49,7 @@ const HomeMobile: React.FC<{ className?: string }> = ({ className }) => {
           >
             <NavLink
               to="/menu"
-              className={`${classes.btn} py-2 px-5 sm:py-3 sm:px-7 lg:py-4 lg:px-9 mx-auto lg:mx-0 rounded-sm text-white-beige hover:bg-red-hover border-[3px] border-white-beige relative self-start`}
+              className={`${classes.btn} py-2 px-5 sm:py-3 sm:px-7 lg:py-4 lg:px-9 mx-auto lg:mx-0 rounded-sm text-white-beige hover:bg-red-hover border-2 md:border-[3px] border-white-beige relative self-start`}
             >
               Ver cardápio
             </NavLink>
@@ -92,7 +92,7 @@ const HomeMobile: React.FC<{ className?: string }> = ({ className }) => {
           </li>
         </ul>
         <ArrowSvg className=" lg:w-32 lg:h-28 text-red-theme rotate-180" />
-        <ArcSvg className="absolute -top-6 -right-[100px] rotate-180 z-10" />
+        <ArcSvg className="hidden md:block absolute -top-6 -right-[100px] rotate-180 z-10" />
         <ArcSvg className="hidden sm:block absolute bottom-24 left-10 rotate-180 z-10" />
         <span className="flex sm:hidden mt-4 text-xs w-full justify-center pr-2 text-neutral-400">
           Feito por
@@ -101,7 +101,7 @@ const HomeMobile: React.FC<{ className?: string }> = ({ className }) => {
           </a>
         </span>
       </div>
-      <footer className="bg-red-theme py-1 sm:py-2 text-[10px] md:text-sm text-white-beige">
+      <footer className="py-1 sm:py-2 text-[10px] md:text-sm text-neutral-400">
         <div className=" max-w-[980px] w-full mx-auto flex items-center justify-between px-2">
           <span>
             <FontAwesomeIcon icon={faTruck} className="mr-1" /> Delivery -
