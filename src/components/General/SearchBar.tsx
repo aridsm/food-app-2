@@ -45,6 +45,12 @@ const SearchBar: React.FC = () => {
     });
   };
 
+  const onBlur = () => {
+    if (searchValue.trim().length) {
+      searchProduct();
+    }
+  };
+
   useEffect(() => {
     setSearchValue(search.search);
   }, [search.search]);
@@ -69,7 +75,7 @@ const SearchBar: React.FC = () => {
   return (
     <div ref={searchRef} className="flex items-stretch relative">
       <input
-        className={`px-2 py-1 text-sm absolute right-9 transition-all ${
+        className={`px-[10px] py-[6px] text-sm absolute right-9 transition-all ${
           searchBarVisible ? "w-40 opacity-100" : "w-0 opacity-0"
         }`}
         placeholder="Pesquisar..."
@@ -77,6 +83,7 @@ const SearchBar: React.FC = () => {
         value={searchValue}
         onChange={({ target }) => setSearchValue(target.value)}
         onKeyDown={(e) => e.key === "Enter" && searchProduct()}
+        onBlur={onBlur}
       />
       <button
         title="Procurar item"

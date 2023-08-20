@@ -50,7 +50,7 @@ const Pagination: React.FC<{
   };
 
   return (
-    <div className="flex justify-between items-center my-6">
+    <div className="flex justify-between items-center mt-5 mb-6">
       {page.totalPages >= 1 && (
         <div className="text-neutral-400 flex-1">
           Página {page.currentPage} de {page.totalPages}
@@ -58,7 +58,7 @@ const Pagination: React.FC<{
       )}
       <div className="flex-1 text-center">{length} resultados</div>
       {page.totalPages >= 1 && (
-        <div className="flex items-center flex-1 text-end gap-1">
+        <div className="flex items-stretch flex-1 text-end gap-1">
           <button
             disabled={page.currentPage === 1}
             className="text-red-theme px-3 hover:bg-neutral-200/[.4] rounded-sm ml-auto disabled:text-red-theme/[.2] disabled:cursor-not-allowed"
